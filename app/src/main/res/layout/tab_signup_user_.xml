@@ -1,0 +1,196 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical" >
+
+    <com.closeby.clzby.customcontrol.CustomFontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:gravity="center"
+        android:text="Sign up and earn Loyalty points"
+        android:textColor="@color/White"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/layoutSecond"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:orientation="vertical" 
+            android:visibility="gone">
+
+            <!--<ScrollView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_weight="1" >-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:background="@drawable/icon_fullname" />
+
+                        <com.closeby.clzby.customcontrol.CustomFontEdittext
+                            android:id="@+id/etFullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:background="@android:color/transparent"
+                            android:hint="Full Name"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/White" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:background="@drawable/icon_email" />
+
+                        <com.closeby.clzby.customcontrol.CustomFontEdittext
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:background="@android:color/transparent"
+                            android:hint="Email"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/White" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:background="@drawable/icon_pwd" />
+
+                        <com.closeby.clzby.customcontrol.CustomFontEdittext
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:background="@android:color/transparent"
+                            android:hint="Password"
+                            android:maxLines="1"
+                            android:password="true"
+                            android:singleLine="true"
+                            android:textColor="@color/White" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" >
+
+                        <ImageView
+                            android:layout_width="43dp"
+                            android:layout_height="43dp"
+                            android:background="@drawable/icon_contact" />
+
+                        <com.closeby.clzby.customcontrol.CustomFontEdittext
+                            android:id="@+id/etContactNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:background="@android:color/transparent"
+                            android:hint="Contact Number"
+                            android:maxLines="1"
+                            android:inputType="phone"
+                            android:singleLine="true"
+                            android:textColor="@color/White" />
+                    </LinearLayout>
+                </LinearLayout>
+            <!--</ScrollView>-->
+
+            <com.closeby.clzby.customcontrol.CustomFontButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:text="Submit"
+                android:textColor="@color/White"
+                android:background="@drawable/btn_background_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutFirst"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:orientation="vertical" 
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnGoto"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/icon_manual" />
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:gravity="center"
+                android:text="Enter Details Manualy"
+                android:textColor="@color/White"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/icon_or" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/btn_fb_txt" />
+
+</LinearLayout>

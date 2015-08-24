@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:id="@+id/ivThumb"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:padding="2dip"
+        android:layout_margin="10dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <com.closeby.clzby.customcontrol.CustomFontTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="@color/Black"
+            android:padding="5dp"
+            android:text="title"
+            android:textStyle="bold"/>
+
+        <com.closeby.clzby.customcontrol.CustomFontTextView
+            android:id="@+id/snippet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Black"
+            android:text="snip"
+            android:padding="5dp"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:padding="2dip"
+        android:src="@drawable/icon_logo"
+        />
+
+
+</LinearLayout>

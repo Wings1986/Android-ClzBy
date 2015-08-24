@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.closeby.clzby"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.closeby.clzby.permission.MAPS_RECEIVE" />
+
+    <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+    <application
+        tools:replace="android:theme, android:icon"
+        android:name="com.closeby.clzby.UIApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_clzby"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        tools:replace="android:theme"
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.SignUpActivity"/>
+        <activity android:name=".activity.HomeActivity"/>
+        <activity android:name=".activity.ProfileActivity"/>
+        <activity android:name=".activity.MapActivity"/>
+        <activity android:name=".activity.AddProductActivity"/>
+        <activity android:name=".activity.EditProfileActivity"/>
+        <activity android:name=".activity.SpecialSettingActivity"/>
+        <activity android:name=".activity.FlashMessageActivity"/>
+        <activity android:name=".activity.ChooseInterestActivity"/>
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+    </application>
+
+</manifest>

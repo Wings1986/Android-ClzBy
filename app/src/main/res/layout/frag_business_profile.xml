@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:background="@drawable/icon_fullname" />
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:hint="Full Name"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/White" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:background="@drawable/icon_email" />
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:hint="Email"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/White" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:background="@drawable/icon_pwd" />
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:hint="Password"
+                android:maxLines="1"
+                android:password="true"
+                android:singleLine="true"
+                android:textColor="@color/White" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:background="@drawable/icon_contact" />
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etContactNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:hint="Contact Number"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/White" />
+        </LinearLayout>
+    </LinearLayout>
+
+    
+    <ImageView
+        android:id="@+id/ivPhoto"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/add_image"/>
+
+    <com.closeby.clzby.customcontrol.CustomFontButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_round_blue_bg"
+        android:text="Update"
+        android:textColor="@color/White"/>
+
+</LinearLayout>

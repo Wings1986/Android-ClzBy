@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/grid_deal_bg"
+        android:layout_margin="2dp">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                />
+
+            <FrameLayout
+                android:layout_margin="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                >
+                <LinearLayout
+                    android:id="@+id/specialOfferView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/tvDelayOrginPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$300"
+                        android:textColor="@android:color/white"
+                        android:textSize="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvDelaySpecialPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="$300"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:textSize="12dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvOriginPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="$300"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="12dp"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_gravity="top|right"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnEdit"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/icon_edit_blue"/>
+                <Button
+                    android:id="@+id/btnSetting"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/icon_setting"/>
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/icon_trash"/>
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/ckbEnable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:button="@drawable/checkbox_selector"
+                android:checked="true"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textColor="@android:color/black"
+                android:text="Enable"/>
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvTagLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12dp"
+                    android:text="Tag Line"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvDealName"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:text="Deal Name"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvDealDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="12dp"
+                    android:text="Deal Description"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvSubCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="10dp"
+                    android:text="Sub Category"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:id="@+id/decayDurationView"
+                     android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:id="@+id/tvDecayDuration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Expired"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:textSize="10dp"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnMap"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="3dp"
+                    android:background="@drawable/icon_logo"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

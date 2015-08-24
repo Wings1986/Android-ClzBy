@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/grid_deal_bg"
+        android:layout_margin="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/LineColor"
+            android:orientation="horizontal">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:text="Flash Special"
+                android:padding="5dp"/>
+
+            <CheckBox
+                android:id="@+id/ckbEnable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:button="@drawable/checkbox_selector"
+                android:checked="true"
+                android:paddingLeft="5dp"
+                android:layout_margin="10dp"
+                android:textColor="@android:color/white"
+                android:text="Enable"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnEditType"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:src="@drawable/icon_beacon"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:background="@drawable/grid_beacon_sub_bg">
+
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvBeaconTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:padding="2dp"
+                    android:textSize="15dp"
+                    android:text="Beacon Title"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvBeaconTagLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="2dp"
+                    android:textSize="15dp"
+                    android:text="Beacon Tag Line"/>
+
+                <ImageView
+                    android:id="@+id/ivPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:padding="2dp"/>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvBeaconDescription"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textSize="15dp"
+                        android:text="$299"/>
+
+                    <Button
+                        android:id="@+id/btnEditMessage"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/icon_edit_blue"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.closeby.clzby.customcontrol.CustomFontButton
+            android:id="@+id/btnBeaconTest"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_round_bg"
+            android:text="Test"
+            android:textColor="@color/AppColor"/>
+
+    </LinearLayout>
+
+</LinearLayout>

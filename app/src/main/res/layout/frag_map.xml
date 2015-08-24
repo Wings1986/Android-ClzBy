@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
+    android:orientation="vertical">
+
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/btnRouter"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/icon_goto_map"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="15dp"/>
+</FrameLayout>

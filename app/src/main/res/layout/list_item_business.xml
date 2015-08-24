@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/White">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+         >
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_menu_profile"
+         />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvBusinessName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text="Business name"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvBusinessAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text="Business name"
+                    android:textColor="@android:color/black"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvBusinessCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:textStyle="italic"
+                    android:text="Business name"
+                    android:textColor="@color/LineColor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="right">
+                <ImageView
+                    android:id="@+id/ivLike"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/like_button_tapped"/>
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20"
+                    android:textSize="12dp"
+                    android:paddingLeft="2dp"
+                    android:textColor="@color/AppColor"/>
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="10dp"
+    android:background="@drawable/loading_bg"
+    >
+
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flash Special"
+            android:textColor="@color/AppColor"
+            android:textStyle="bold"
+            android:id="@+id/radioFlash"
+            android:buttonTint="@color/AppColor"
+            android:checked="true"
+            android:layout_gravity="center_horizontal" />
+
+        <RadioButton
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Business Info"
+            android:textColor="@color/AppColor"
+            android:textStyle="bold"
+            android:id="@+id/radioBusiness"
+            android:buttonTint="@color/AppColor"
+            android:layout_gravity="center_horizontal" />
+
+    </RadioGroup>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#888888"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <com.closeby.clzby.customcontrol.CustomFontButton
+            android:id="@+id/btnSave"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_round_bg"
+            android:text="Save"
+            android:textStyle="bold"
+            android:textColor="@color/AppColor"/>
+
+        <com.closeby.clzby.customcontrol.CustomFontButton
+            android:id="@+id/btnCancel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_round_bg"
+            android:text="Cancel"
+            android:textStyle="bold"
+            android:textColor="@color/AppColor"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

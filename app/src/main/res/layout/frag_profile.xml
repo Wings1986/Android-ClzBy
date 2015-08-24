@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/avatar"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvBusinessName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:text="Beacon Business"/>
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvBusinessPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:text="123456789"/>
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvBusinessAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="10dp"
+                        android:textSize="13dp"
+                        android:text="123456789"/>
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvBusinessCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:text="123456789"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/viewCheckIn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <com.closeby.clzby.customcontrol.CustomFontButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CHECK IN"
+                    android:textStyle="bold"
+                    android:textColor="@color/White"
+                    android:background="@color/AppColor"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#90000000"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvLike"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15dp"
+                        android:text="123456789"/>
+
+                    <ImageView
+                        android:id="@+id/ivLike"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/like_button_tapped"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/LineColor"
+                android:layout_margin="5dp"/>
+
+            <!-- detail -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="MON"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeMon"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeMon"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/LineColor"
+                        android:layout_margin="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="TUE"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeTue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeTue"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/LineColor"
+                        android:layout_margin="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="WED"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeWed"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeWed"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/LineColor"
+                        android:layout_margin="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="THU"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeThu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeThu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/LineColor"
+                        android:layout_margin="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="FRI"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeFri"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeFri"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/LineColor"
+                        android:layout_margin="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="SAT"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeSat"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeSat"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/LineColor"
+                        android:layout_margin="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:text="SUN"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvStartTimeSun"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="04:00"/>
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvEndTimeSun"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@android:color/black"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:text="16:30"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/LineColor"
+                android:layout_margin="5dp"/>
+
+
+            <LinearLayout
+                android:id="@+id/subDealList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <it.sephiroth.android.library.widget.HListView
+                    android:id="@+id/hListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/LineColor"
+                    android:layout_margin="5dp"/>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+                    <ImageView
+                        android:id="@+id/ivPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <com.closeby.clzby.customcontrol.CustomFontTextView
+                        android:id="@+id/tvDiscountTagLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:layout_margin="10dp"
+                        android:textSize="15dp"
+                        android:text="Discount tag Line"
+                        android:padding="10dp"
+                        android:background="#80000000"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:background="#80000000"
+                        android:padding="7dp"
+                        android:orientation="vertical">
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvDealName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/white"
+                            android:textSize="15dp"
+                            android:text="Discount tag Line"
+                            android:layout_marginBottom="7dp"
+                            />
+
+                        <com.closeby.clzby.customcontrol.CustomFontTextView
+                            android:id="@+id/tvDealDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@android:color/white"
+                            android:textSize="15dp"
+                            android:text="Discount tag Line"
+                            />
+
+                    </LinearLayout>
+
+
+                    <FrameLayout
+                        android:layout_margin="10dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle"
+                        android:layout_gravity="top|right"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/specialOfferView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:visibility="gone">
+                            <TextView
+                                android:id="@+id/tvDelayOrginPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="$300"
+                                android:textColor="@android:color/white"
+                                android:textSize="10dp"/>
+
+                            <TextView
+                                android:id="@+id/tvDelaySpecialPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1dp"
+                                android:text="$300"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:textSize="12dp"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvOriginPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="$300"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="12dp"/>
+
+                    </FrameLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/decayDurationView"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:background="@drawable/circle"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="10dp">
+
+                        <TextView
+                            android:id="@+id/tvDiscayRemaining"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Expired"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</LinearLayout>

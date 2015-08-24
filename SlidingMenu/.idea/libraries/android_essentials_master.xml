@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="android-essentials-master">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../CloseBy/libs/android-essentials-master.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

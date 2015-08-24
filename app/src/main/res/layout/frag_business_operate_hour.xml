@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="MON"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbMonStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbMonEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="TUE"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbTueStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbTueEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="WED"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbWedStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbWedEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="THU"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbThuStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbThuEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="FRI"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbFriStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbFriEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="SAT"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbSatStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbSatEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:padding="10dp"
+                android:text="SUN"
+                android:textColor="@color/White"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbSunStartTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/lbSunEndTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="00:00"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/Black"
+                android:background="@drawable/edittext_round_bg"
+                android:textAlignment="center"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.closeby.clzby.customcontrol.CustomFontButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_round_blue_bg"
+        android:text="Update"
+        android:textColor="@color/White"/>
+
+</LinearLayout>

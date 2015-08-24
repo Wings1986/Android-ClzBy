@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ClzBy</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyBs-xu_sO6VxOovZZGxsyncFxJvjEgbocA</string>
+
+    <string name="facebook_app_id">403324309876017</string>
+
+</resources>

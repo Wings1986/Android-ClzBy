@@ -1,0 +1,10 @@
+<resources>
+
+    <dimen name="slidingmenu_offset">100dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+
+    <dimen name="navigation_height">44dp</dimen>
+
+    <dimen name="profile_deal_width">100dip</dimen>
+
+</resources>

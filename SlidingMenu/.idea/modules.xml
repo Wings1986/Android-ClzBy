@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../CloseBy/CloseBy.iml" filepath="$PROJECT_DIR$/../CloseBy/CloseBy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SlidingMenu.iml" filepath="$PROJECT_DIR$/SlidingMenu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../shopingappandroid.iml" filepath="$PROJECT_DIR$/../shopingappandroid.iml" />
+    </modules>
+  </component>
+</project>

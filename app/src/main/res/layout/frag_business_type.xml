@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/BackgroundColor"
+    android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Services"
+            android:id="@+id/radioServices"
+            android:padding="10dp"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Products"
+            android:id="@+id/radioProducts"
+            android:padding="10dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Both products and services"
+            android:id="@+id/radioBoth"
+            android:padding="10dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NONE"
+            android:id="@+id/radioNone"
+            android:padding="10dp"/>
+
+    </RadioGroup>
+
+    <com.closeby.clzby.customcontrol.CustomFontButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_round_blue_bg"
+        android:text="Update"
+        android:textColor="@color/White"/>
+
+</LinearLayout>
