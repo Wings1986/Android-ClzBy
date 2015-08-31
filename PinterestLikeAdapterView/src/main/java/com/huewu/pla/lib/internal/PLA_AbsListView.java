@@ -22,9 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.os.Bundle;
 import android.os.Debug;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -36,16 +34,13 @@ import android.view.ViewConfiguration;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Filter;
-import android.widget.Filterable;
+import android.widget.Adapter;
 import android.widget.ListAdapter;
 import android.widget.Scroller;
 
 import com.huewu.pla.R;
 import com.huewu.pla.lib.DebugUtil;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -67,8 +62,6 @@ import java.util.Stack;
  */
 public abstract class PLA_AbsListView extends PLA_AdapterView<ListAdapter> implements
 ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListener {
-
-    private static final String TAG = "PLA_AbsListView";
 
     //FIXME not supported features... (removed from original AbsListView)...
     //Filter
@@ -312,8 +305,6 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
      */
     boolean mScrollingCacheEnabled;
 
-    private SavedState mPendingSync;
-
     /**
      * Optional callback to notify client when scroll position has changed
      */
@@ -360,7 +351,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
     /**
      * Acts upon click
      */
-    private PerformClick mPerformClick;
+    private PLA_AbsListView.PerformClick mPerformClick;
 
     /**
      * This view is in transcript mode -- it shows the bottom of the list when the data
@@ -380,7 +371,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
     private boolean mIsChildViewEnabled;
 
     /**
-     * The last scroll state reported to clients through {@link com.huewu.pla.lib.internal.PLA_AbsListView.OnScrollListener}.
+     * The last scroll state reported to clients through {@link OnScrollListener}.
      */
     private int mLastScrollState = OnScrollListener.SCROLL_STATE_IDLE;
 
@@ -430,7 +421,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
          * Callback method to be invoked while the list view or grid view is being scrolled. If the
          * view is being scrolled, this method will be called before the next frame of the scroll is
          * rendered. In particular, it will be called before any calls to
-         * {@link android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)}.
+         * {@link Adapter#getView(int, View, ViewGroup)}.
          *
          * @param view The view whose scroll state is being reported
          *
@@ -449,7 +440,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
          * @param totalItemCount the number of items in the list adaptor
          */
         public void onScroll(PLA_AbsListView view, int firstVisibleItem, int visibleItemCount,
-                             int totalItemCount);
+                int totalItemCount);
     }
 
     public PLA_AbsListView(Context context) {
@@ -457,20 +448,9 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
         initAbsListView();
 
         setVerticalScrollBarEnabled(true);
-        TypedArray a = context.obtainStyledAttributes(R.styleable.View);
-
-        // FIXME: ad hoc patch
-        try {
-            // initializeScrollbars(TypedArray)
-            final Method initializeScrollbars =
-                    android.view.View.class.getDeclaredMethod("initializeScrollbars",
-                            TypedArray.class);
-            initializeScrollbars.invoke(this, a);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        a.recycle();
+//        TypedArray a = context.obtainStyledAttributes(R.styleable.View);
+////        initializeScrollbars(a);
+//        a.recycle();
     }
 
     public PLA_AbsListView(Context context, AttributeSet attrs) {
@@ -585,7 +565,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
      * @return true if the scrolling cache is enabled, false otherwise
      *
      * @see #setScrollingCacheEnabled(boolean)
-     * @see android.view.View#setDrawingCacheEnabled(boolean)
+     * @see View#setDrawingCacheEnabled(boolean)
      */
     @ViewDebug.ExportedProperty
     public boolean isScrollingCacheEnabled() {
@@ -603,7 +583,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
      * @param enabled true to enable the scroll cache, false otherwise
      *
      * @see #isScrollingCacheEnabled()
-     * @see android.view.View#setDrawingCacheEnabled(boolean)
+     * @see View#setDrawingCacheEnabled(boolean)
      */
     public void setScrollingCacheEnabled(boolean enabled) {
         if (mScrollingCacheEnabled && !enabled) {
@@ -662,6 +642,16 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
             requestLayout();
             invalidate();
         }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        super.onRestoreInstanceState(state);
+
+        DebugUtil.LogDebug("data changed by onRestoreInstanceState()");
+
+        mDataChanged = true;
+        requestLayout();
     }
 
     @Override
@@ -1537,7 +1527,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
                                 mPerformClick = new PerformClick();
                             }
 
-                            final PerformClick performClick = mPerformClick;
+                            final PLA_AbsListView.PerformClick performClick = mPerformClick;
                             performClick.mChild = child;
                             performClick.mClickMotionPosition = motionPosition;
                             performClick.rememberWindowAttachCount();
@@ -2462,51 +2452,14 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
             if (mNeedSync) {
                 // Update this first, since setNextSelectedPositionInt inspects it
                 mNeedSync = false;
-                mPendingSync = null;
-
                 if (mTranscriptMode == TRANSCRIPT_MODE_ALWAYS_SCROLL ||
                         (mTranscriptMode == TRANSCRIPT_MODE_NORMAL &&
-                                mFirstPosition + getChildCount() >= mOldItemCount)) {
+                        mFirstPosition + getChildCount() >= mOldItemCount)) {
                     mLayoutMode = LAYOUT_FORCE_BOTTOM;
                     return;
                 }
 
                 switch (mSyncMode) {
-                    case SYNC_SELECTED_POSITION:
-                        if (isInTouchMode()) {
-                            // We saved our state when not in touch mode. (We know this because
-                            // mSyncMode is SYNC_SELECTED_POSITION.) Now we are trying to
-                            // restore in touch mode. Just leave mSyncPosition as it is (possibly
-                            // adjusting if the available range changed) and return.
-                            mLayoutMode = LAYOUT_SYNC;
-                            mSyncPosition = Math.min(Math.max(0, mSyncPosition), count - 1);
-
-                            return;
-                        } else {
-                            // See if we can find a position in the new data with the same
-                            // id as the old selection. This will change mSyncPosition.
-                            newPos = findSyncPosition();
-                            if (newPos >= 0) {
-                                // Found it. Now verify that new selection is still selectable
-                                selectablePos = lookForSelectablePosition(newPos, true);
-                                if (selectablePos == newPos) {
-                                    // Same row id is selected
-                                    mSyncPosition = newPos;
-
-                                    if (mSyncHeight == getHeight()) {
-                                        // If we are at the same height as when we saved state, try
-                                        // to restore the scroll position too.
-                                        mLayoutMode = LAYOUT_SYNC;
-                                    } else {
-                                        // We are not the same height as when the selection was saved, so
-                                        // don't try to restore the exact position
-                                        mLayoutMode = LAYOUT_SET_SELECTION;
-                                    }
-                                    return;
-                                }
-                            }
-                        }
-                        break;
                     case SYNC_FIRST_POSITION:
                         // Leave mSyncPosition as it is -- just pin to available range
                         mLayoutMode = LAYOUT_SYNC;
@@ -2530,14 +2483,10 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
                 // Make sure we select something selectable -- first look down
                 selectablePos = lookForSelectablePosition(newPos, true);
 
+                // Looking down didn't work -- try looking up
+                selectablePos = lookForSelectablePosition(newPos, false);
                 if (selectablePos >= 0) {
                     return;
-                } else {
-                    // Looking down didn't work -- try looking up
-                    selectablePos = lookForSelectablePosition(newPos, false);
-                    if (selectablePos >= 0) {
-                        return;
-                    }
                 }
             } else {
 
@@ -2551,23 +2500,19 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
 
         // Nothing is selected. Give up and reset everything.
         mLayoutMode = mStackFromBottom ? LAYOUT_FORCE_BOTTOM : LAYOUT_FORCE_TOP;
-        mSelectedPosition = INVALID_POSITION;
-        mSelectedRowId = INVALID_ROW_ID;
         mNeedSync = false;
-        mPendingSync = null;
-        checkSelectionChanged();
     }
 
     /**
      * adapter data is changed.. should keep current view layout information..
-     * @param syncPosition
+     * @param mSyncPosition
      */
     protected void onLayoutSync(int syncPosition) {
     }
 
     /**
      * adapter data is changed.. children layout manipulation is finished.
-     * @param syncPosition
+     * @param mSyncPosition
      */
     protected void onLayoutSyncFinished(int syncPosition) {
     }
@@ -2631,12 +2576,12 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new LayoutParams(getContext(), attrs);
+        return new PLA_AbsListView.LayoutParams(getContext(), attrs);
     }
 
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
-        return p instanceof LayoutParams;
+        return p instanceof PLA_AbsListView.LayoutParams;
     }
 
     /**
@@ -2709,7 +2654,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
         // Reclaim views on screen
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
-            LayoutParams lp = (LayoutParams) child.getLayoutParams();
+            PLA_AbsListView.LayoutParams lp = (PLA_AbsListView.LayoutParams) child.getLayoutParams();
             // Don't reclaim header or footer views, or views that should be ignored
             if (lp != null && mRecycler.shouldRecycleViewType(lp.viewType)) {
                 views.add(child);
@@ -2787,7 +2732,9 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
      * associated to the View.
      *
      * @param listener The recycler listener to be notified of views set aside
-     *                 in the recycler.
+     *        in the recycler.
+     *
+     * @see android.widget.PLA_AbsListView.RecycleBin
      * @see android.widget.AbsListView.RecyclerListener
      */
     public void setRecyclerListener(RecyclerListener listener) {
@@ -2854,6 +2801,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
      * inside the RecycleBin's scrap heap. This listener is used to free resources
      * associated to Views placed in the RecycleBin.
      *
+     * @see android.widget.PLA_AbsListView.RecycleBin
      * @see android.widget.AbsListView#setRecyclerListener(android.widget.AbsListView.RecyclerListener)
      */
     public static interface RecyclerListener {
@@ -2978,7 +2926,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
             final View[] activeViews = mActiveViews;
             for (int i = 0; i < childCount; i++) {
                 View child = getChildAt(i);
-                LayoutParams lp = (LayoutParams) child.getLayoutParams();
+                PLA_AbsListView.LayoutParams lp = (PLA_AbsListView.LayoutParams) child.getLayoutParams();
                 // Don't put header or footer views into the scrap heap
                 if (lp != null && lp.viewType != ITEM_VIEW_TYPE_HEADER_OR_FOOTER) {
                     // Note:  We do place AdapterView.ITEM_VIEW_TYPE_IGNORE in active views.
@@ -3054,7 +3002,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
         void addScrapView(View scrap) {
             DebugUtil.i("addToScrap");
 
-            LayoutParams lp = (LayoutParams) scrap.getLayoutParams();
+            PLA_AbsListView.LayoutParams lp = (PLA_AbsListView.LayoutParams) scrap.getLayoutParams();
             if (lp == null) {
                 return;
             }
@@ -3098,7 +3046,7 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
             for (int i = count - 1; i >= 0; i--) {
                 final View victim = activeViews[i];
                 if (victim != null) {
-                    int whichScrap = ((LayoutParams) victim.getLayoutParams()).viewType;
+                    int whichScrap = ((PLA_AbsListView.LayoutParams) victim.getLayoutParams()).viewType;
 
                     activeViews[i] = null;
 
@@ -3279,97 +3227,5 @@ ViewTreeObserver.OnGlobalLayoutListener, ViewTreeObserver.OnTouchModeChangeListe
         if( count == 0 )
             return 0;
         return getChildAt(count - 1).getBottom();
-    }
-
-
-    static class SavedState {
-        long firstId;
-        int viewTop;
-        int position;
-        int height;
-        int childCount;
-        int[] viewTops;
-    }
-
-    @Override
-    public Parcelable onSaveInstanceState() {
-
-        Bundle ss = new Bundle();
-        ss.putParcelable("instanceState", super.onSaveInstanceState());
-
-        if (mPendingSync != null) {
-            // Just keep what we last restored.
-            ss.putLong("firstId", mPendingSync.firstId);
-            ss.putInt("viewTop",  mPendingSync.viewTop);
-            ss.putIntArray("viewTops", mPendingSync.viewTops);
-            ss.putInt("position", mPendingSync.position);
-            ss.putInt("height", mPendingSync.height);
-            ss.putInt("childCount", mPendingSync.childCount);
-            return ss;
-        }
-
-        ss.putInt("height", getHeight());
-        int childCount = getChildCount();
-        ss.putInt("childCount", childCount);
-        boolean haveChildren = childCount > 0 && mItemCount > 0;
-        if (haveChildren && mFirstPosition > 0) {
-            // Remember the position of the first child.
-            // We only do this if we are not currently at the top of
-            // the list, for two reasons:
-            // (1) The list may be in the process of becoming empty, in
-            // which case mItemCount may not be 0, but if we try to
-            // ask for any information about position 0 we will crash.
-            // (2) Being "at the top" seems like a special case, anyway,
-            // and the user wouldn't expect to end up somewhere else when
-            // they revisit the list even if its content has changed.
-
-            int firstPos = mFirstPosition;
-            if (firstPos >= mItemCount) {
-                firstPos = mItemCount - 1;
-            }
-            ss.putInt("position", firstPos);
-            ss.putLong("firstId", mAdapter.getItemId(firstPos));
-            View v = getChildAt(0);
-            ss.putInt("viewTop",  v.getTop());
-            int[] viewTops = new int[childCount];
-            for (int i = 0; i < childCount; i++) {
-                viewTops[i] = getChildAt(i).getTop();
-            }
-            ss.putIntArray("viewTops", viewTops);
-        } else {
-            ss.putInt("viewTop",  0);
-            ss.putLong("firstId", INVALID_POSITION);
-            ss.putInt("position", 0);
-            ss.putIntArray("viewTops", new int[1]);
-        }
-        return ss;
-    }
-
-    @Override
-    public void onRestoreInstanceState(Parcelable state) {
-        if (state instanceof  Bundle) {
-            Bundle bundle = (Bundle) state;
-            mDataChanged = true;
-            mSyncHeight = bundle.getInt("height");
-            long firstId = bundle.getLong("firstId");
-            if (firstId >= 0) {
-                mNeedSync = true;
-                SavedState ss = new SavedState();
-                ss.firstId = firstId;
-                ss.height = (int) mSyncHeight;
-                ss.position = bundle.getInt("position");
-                ss.viewTop = bundle.getInt("viewTop");
-                ss.childCount = bundle.getInt("childCount");
-                ss.viewTops = bundle.getIntArray("viewTops");
-                mPendingSync = ss;
-                mSyncRowId = ss.firstId;
-                mSyncPosition = ss.position;
-                mSpecificTop = ss.viewTop;
-                mSpecificTops = ss.viewTops;
-            }
-            state = bundle.getParcelable("instanceState");
-        }
-        super.onRestoreInstanceState(state);
-        requestLayout();
     }
 }//end of class

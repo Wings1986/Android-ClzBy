@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +7,45 @@
     android:orientation="vertical">
 
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchView" />
-
-    <com.applidium.headerlistview.HeaderListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listview"
-        />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/Black">
+
+            <Button
+                android:id="@+id/btnSelAll"
+                android:layout_width="105dp"
+                android:layout_height="30dp"
+                android:background="@drawable/icon_select_all"/>
+            <Button
+                android:id="@+id/btnDeselAll"
+                android:layout_width="105dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/icon_deselect_all"/>
+
+        </LinearLayout>
+
+        <com.applidium.headerlistview.HeaderListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="right|bottom"
+        android:background="@drawable/btn_go"/>
+
+</FrameLayout>

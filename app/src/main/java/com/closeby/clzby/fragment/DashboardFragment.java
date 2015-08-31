@@ -231,6 +231,7 @@ public class DashboardFragment extends BaseFragment {
                                     int impressions = dicInfo.getInt("TotalDealImpressions");
                                     pinImpressions.setText("" + impressions);
                                 } catch (Exception e) {
+                                    pinImpressions.setText("0");
                                     e.printStackTrace();
                                 }
 
@@ -238,6 +239,7 @@ public class DashboardFragment extends BaseFragment {
                                     int likes = dicInfo.getInt("TotalProductLikes");
                                     pinLikes.setText("" + likes);
                                 } catch (Exception e) {
+                                    pinLikes.setText("0");
                                     e.printStackTrace();
                                 }
 
@@ -245,6 +247,7 @@ public class DashboardFragment extends BaseFragment {
                                     int messages = dicInfo.getInt("TotalNumberOfSentOutMessages");
                                     pinMessages.setText("" + messages);
                                 } catch (Exception e) {
+                                    pinMessages.setText("0");
                                     e.printStackTrace();
                                 }
 

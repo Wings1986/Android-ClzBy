@@ -115,7 +115,7 @@ public class HomeActivity extends SlidingFragmentActivity {
                                 break;
                             case 4:
                                 mRightFrag = DealFragment.newInstance();
-                                title = "Deals";
+                                title = "Deals CloseBy";
 
                                 // set right button
                                 showNativationRightItem(R.drawable.icon_category_filter);

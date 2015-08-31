@@ -348,7 +348,10 @@ public class MyMapFragment extends BaseFragment {
                 .add("UserID", AppData.getInstance().loadLoginUserID())
                 .add("userlat", "" + MyLocation.getInstance().getLatitude())
                 .add("userlong", "" + MyLocation.getInstance().getLongitude())
-                .add("range", "" + AppData.RANGE);
+                .add("range", "" + AppData.RANGE)
+                .add("fromrow", "0")
+                .add("limit", "100")
+                ;
 
 
         httpClient.get("/GetBusinessesWithinRange.aspx", params, new AsyncCallback() {

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import com.closeby.clzby.R;
  * Created by Stone on 11/28/2014.
  */
 @SuppressLint("InflateParams") 
-public class BaseActivity extends ActionBarActivity
+public class BaseActivity extends AppCompatActivity
 {
     public static final int LEFT_BTN_NONE = 0;
     public static final int LEFT_BTN_BACK = 1;
@@ -63,7 +64,6 @@ public class BaseActivity extends ActionBarActivity
 
 
         actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);

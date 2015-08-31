@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -34,9 +37,8 @@ import com.closeby.clzby.listener.OnLayoutSizeListener;
 import com.github.siyamed.shapeimageview.CircularImageView;
 
 
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshGridView;
-import com.handmark.pulltorefresh.library.PullToRefreshStaggeredView;
+import com.huewu.pla.lib.MultiColumnPullToRefreshListView;
+import com.huewu.pla.lib.internal.PLA_AbsListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -53,9 +55,11 @@ import org.json.JSONObject;
  */
 public class DealFragment extends BaseFragment {
 
-    GridView mGridView;
+    LinearLayout searchLayout;
+
+    MultiColumnPullToRefreshListView mGridView;
     MyCustomAdapter mAdapter;
-    PullToRefreshStaggeredView mPullRefreshGridView;
+//    PullToRefreshStaggeredView mPullRefreshGridView;
 
 
     JSONArray arrayData = new JSONArray(), arrayDataSource = new JSONArray();
@@ -64,7 +68,7 @@ public class DealFragment extends BaseFragment {
 
     int m_offset = 0, m_limit = 10;
 
-
+    private int oldScrolly;
 
     public static DealFragment newInstance() {
         DealFragment fragment = new DealFragment();
@@ -87,7 +91,10 @@ public class DealFragment extends BaseFragment {
 
     private void initView(View view) {
 
+        searchLayout = (LinearLayout) view.findViewById(R.id.searchLayout);
+        searchLayout.setVisibility(View.INVISIBLE);
 
+/*
         mPullRefreshGridView = (PullToRefreshStaggeredView) view.findViewById(R.id.gridview);
         mGridView = mPullRefreshGridView.getRefreshableView();
 
@@ -120,27 +127,64 @@ public class DealFragment extends BaseFragment {
 
             }
         });
+*/
+        mGridView = (MultiColumnPullToRefreshListView) view.findViewById(R.id.gridView);
+        mGridView.setOnRefreshListener(new MultiColumnPullToRefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
 
         mAdapter = new MyCustomAdapter();
         mGridView.setAdapter(mAdapter);
 
-
-        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mGridView.setOnScrollListener(new PLA_AbsListView.OnScrollListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onScrollStateChanged(PLA_AbsListView view, int scrollState) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public void onScroll(PLA_AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                View view = absListView.getChildAt(0);
+                int scrolly = (view == null) ? 0 : -view.getTop() + absListView.getFirstVisiblePosition() * view.getHeight();
+                int margin = 10;
+
+                if (scrolly > oldScrolly + margin) {
+                    Log.d("", "SCROLL_UP");
+                    oldScrolly = scrolly;
+
+                    searchLayout.setVisibility(View.VISIBLE);
+
+                } else if (scrolly < oldScrolly - margin) {
+                    Log.d("", "SCROLL_DOWN");
+                    oldScrolly = scrolly;
+
+                    searchLayout.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
+
+        final EditText searchView = (EditText) view.findViewById(R.id.searchView);
+        searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (arrayData == null) {
-                    return false;
+                    return;
                 }
 
                 arrayDataSource = MyJSON.clearJSONArray(arrayDataSource);
 
+                String newText = searchView.getText().toString();
 
                 if (newText.length() < 1) {
                     arrayDataSource = arrayData;
@@ -149,7 +193,6 @@ public class DealFragment extends BaseFragment {
 
                         try {
                             JSONObject obj = arrayData.getJSONObject(i);
-
 
                             String productName = obj.getString("ProductName");
                             String businessName = obj.getString("BusinessName");
@@ -169,10 +212,14 @@ public class DealFragment extends BaseFragment {
 
                 mAdapter.setItem(arrayDataSource);
                 mAdapter.notifyDataSetChanged();
+            }
 
-                return false;
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+
 
         requestAPI();
     }
@@ -237,7 +284,8 @@ public class DealFragment extends BaseFragment {
                                 mAdapter.setItem(arrayDataSource);
                                 mAdapter.notifyDataSetChanged();
 
-                                mPullRefreshGridView.onRefreshComplete();
+//                                mPullRefreshGridView.onRefreshComplete();
+                                mGridView.onRefreshComplete();
                             }
                         });
 
@@ -260,7 +308,7 @@ public class DealFragment extends BaseFragment {
 
     public class MyCustomAdapter extends BaseAdapter {
 
-        private JSONArray items = new JSONArray();
+        public JSONArray items = new JSONArray();
         private LayoutInflater mInflater;
 
         public MyCustomAdapter() {
@@ -278,7 +326,10 @@ public class DealFragment extends BaseFragment {
         }
 
         @Override
-        public String getItem(int position) {
+        public Object getItem(int position) {
+            try {
+                return items.get(position);
+            } catch (Exception e) {e.printStackTrace();}
             return null;
         }
 
@@ -288,7 +339,7 @@ public class DealFragment extends BaseFragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
 
             if (convertView == null) {
@@ -347,24 +398,24 @@ public class DealFragment extends BaseFragment {
                 try {
                     holder.lbBusinessName.setText(item.getString("BusinessName"));
 
-                    if (AppData.getInstance().isBusiness()) {
-                        holder.ivLike.setVisibility(View.GONE);
-                        holder.lbLike.setVisibility(View.GONE);
-                    }
-                    else {
-                        holder.ivLike.setVisibility(View.VISIBLE);
-                        holder.lbLike.setVisibility(View.VISIBLE);
 
-                        boolean liked = false;
-                        int likes = 0;
-                        try {
-                            liked = item.getBoolean("CurrentUserHasLiked");
-                            likes = item.getInt("NumberOfLikes");
-                        } catch (Exception e) {e.printStackTrace();}
+                    int liked = 0;
+                    int likes = 0;
+                    try {
+                        liked = item.getInt("CurrentUserHasLiked");
+                        likes = item.getInt("NumberOfLikes");
+                    } catch (Exception e) {e.printStackTrace();}
 
-                        holder.ivLike.setImageResource(liked ? R.drawable.like_button_tapped : R.drawable.like_button);
-                        holder.lbLike.setText("" + likes);
-                    }
+                    holder.ivLike.setImageResource(liked == 1 ? R.drawable.like_button_tapped : R.drawable.like_button);
+                    holder.lbLike.setText("" + likes);
+
+                    holder.ivLike.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onLike(position);
+                        }
+                    });
+
                 } catch (Exception e) {e.printStackTrace();}
 
                 try {
@@ -425,7 +476,7 @@ public class DealFragment extends BaseFragment {
 
                 holder.lbOriginPrice.setVisibility(View.GONE);
                 try {
-                    holder.lbOriginPrice.setText("$" + item.getString("OrigionalPrice"));
+                    holder.lbOriginPrice.setText("$" + String.format("%.02f", item.getDouble("OrigionalPrice")));
                 } catch (Exception e) {}
 
                 boolean bDecaySpecial = false;
@@ -439,8 +490,8 @@ public class DealFragment extends BaseFragment {
                         holder.subDecayView.setVisibility(View.VISIBLE);
                         holder.subDecayTimeView.setVisibility(View.VISIBLE);
 
-                        holder.lbDecayOriginPrice.setText("$" + item.getInt("OrigionalPrice"));
-                        holder.lbDecaySpecialPrice.setText("$" + item.getInt("SpecialPrice"));
+                        holder.lbDecayOriginPrice.setText("$" + String.format("%.02f", item.getDouble("OrigionalPrice")));
+                        holder.lbDecaySpecialPrice.setText("$" + String.format("%.02f", item.getDouble("SpecialPrice")));
 
                         holder.lbDecayDuration.setText(Global.getLeftTime(item.getString("DecayEndTime")));
                     } catch (Exception e) {}
@@ -500,5 +551,102 @@ public class DealFragment extends BaseFragment {
 
     }
 
+
+    void onLike(final int pos) {
+        final JSONObject item = (JSONObject) mAdapter.getItem(pos);
+        if (item == null) {
+            return;
+        }
+
+        String businessID = "";
+        String dealID = "";
+
+        try {
+            businessID = item.getString("BusinessID");
+        } catch (Exception e) {e.printStackTrace();}
+
+        try {
+            dealID = item.getString("ID");
+        } catch (Exception e) {e.printStackTrace();}
+
+
+
+
+        final Dialog waitDialog = DialogHelper.getWaitDialog(getActivity());
+        waitDialog.show();
+
+        AndroidHttpClient httpClient = new AndroidHttpClient(Global.kServerURL);
+        httpClient.setMaxRetries(3);
+        ParameterMap params = httpClient.newParams()
+                .add("guid", Global.kGUID)
+                .add("UserID", AppData.getInstance().loadLoginUserID())
+                .add("BusinessID", businessID)
+                .add("DealID", dealID)
+                ;
+
+        String url = "/UserSaveDeal.aspx";
+
+
+        httpClient.get(url, params, new AsyncCallback() {
+
+            @Override
+            public void onComplete(HttpResponse httpResponse) {
+
+                waitDialog.dismiss();
+
+                try {
+                    JSONObject result = new JSONObject(httpResponse.getBodyAsString());
+
+                    if (result.getString("Success").equals("Success")) {
+
+                        int liked = 0;
+                        int likes = 0;
+
+                        try {
+                            liked = item.getInt("CurrentUserHasLiked");
+                            likes = item.getInt("NumberOfLikes");
+                        } catch (Exception e) {e.printStackTrace();}
+
+                        try {
+                            if (liked == 1) {
+                                item.put("CurrentUserHasLiked", 0);
+                                item.put("NumberOfLikes", likes - 1);
+                            } else {
+                                item.put("CurrentUserHasLiked", 1);
+                                item.put("NumberOfLikes", likes + 1);
+                            }
+                        } catch (Exception e) {e.printStackTrace();}
+
+                        arrayDataSource.put(pos, item);
+
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+
+                                mAdapter.setItem(arrayDataSource);
+                                mAdapter.notifyDataSetChanged();
+
+//                                mPullRefreshGridView.onRefreshComplete();
+                                mGridView.onRefreshComplete();
+                            }
+                        });
+
+
+                    } else {
+
+                        DialogHelper.showToast(getActivity(), result.getString("Message"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
+
+    }
 
 }

@@ -79,6 +79,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.2.42/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/estimote-sdk-preview/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/it.sephiroth.android.library.horizontallistview/hlistview/1.2.2/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/pl.droidsonroids.gif/android-gif-drawable/1.1.9/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jacoco" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/javaResources" />
@@ -112,6 +113,7 @@
     <orderEntry type="library" exported="" name="http-client-java-0.89" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.4" level="project" />
+    <orderEntry type="library" exported="" name="android-gif-drawable-1.1.9" level="project" />
     <orderEntry type="library" exported="" name="android-shape-imageview-0.9.2" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
     <orderEntry type="module" module-name="SlidingMenu" exported="" />

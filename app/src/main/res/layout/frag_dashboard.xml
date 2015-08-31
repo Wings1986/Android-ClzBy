@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menu_frame"
     android:layout_width="match_parent"
@@ -7,25 +7,30 @@
     android:background="@color/BackgroundColor"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/dashboard_background"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/grid_beacon_sub_bg"
             >
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="250dp"
-                android:layout_height="40dp"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:background="@drawable/spinner_round_bg"/>
@@ -40,154 +45,144 @@
 
                 <com.closeby.clzby.customcontrol.CustomFontTextView
                     android:id="@+id/lbStartTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="30dp"
                     android:text="Start Time"
-                    android:padding="10dp"
                     android:textColor="@color/AppColor"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:background="@drawable/button_round_white_bg"/>
+
                 <com.closeby.clzby.customcontrol.CustomFontTextView
                     android:id="@+id/lbEndTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
                     android:text="End Time"
-                    android:padding="10dp"
                     android:textColor="@color/AppColor"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:background="@drawable/button_round_white_bg"/>
+
                 <com.closeby.clzby.customcontrol.CustomFontButton
                     android:id="@+id/btnGo"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:text="GO"
                     android:padding="5dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:background="@drawable/button_round_blue_bg"/>
             </LinearLayout>
 
-            <com.closeby.clzby.customcontrol.CustomFontTextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/AppColor"
-                android:textSize="25dp"
-                android:textStyle="bold"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_gravity="center_vertical"
-                android:text="Total Impressions"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                />
+                android:layout_marginTop="30dp"
+                >
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/AppColor"
+                    android:textSize="20dp"
+                    android:gravity="left|center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:text="Total Impressions"
+                    android:padding="10dp"
+                    />
 
 
-            <com.closeby.clzby.customcontrol.CustomFontTextView
-                android:id="@+id/lbImpressions"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:textColor="@color/AppColor"
-                android:textSize="35dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:text="0"
-                android:padding="10dp"
-                android:background="@drawable/circle_bg"/>
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/lbImpressions"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textColor="@color/AppColor"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="120"
+                    android:padding="10dp"
+                    android:lines="1"
+                    android:background="@drawable/circle_bg"/>
+
+            </LinearLayout>
 
 
-
-
-            <!--<com.todddavies.components.progressbar.ProgressWheel-->
-                <!--android:id="@+id/pinImpression"-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--ProgressWheel:text="230"-->
-                <!--ProgressWheel:textColor="@color/AppColor"-->
-                <!--ProgressWheel:textSize="30dp"-->
-                <!--ProgressWheel:rimColor="@color/AppColor"-->
-                <!--ProgressWheel:barLength="60dp"-->
-                <!--ProgressWheel:barColor="@color/AppColor"-->
-                <!--ProgressWheel:barWidth="5dp"-->
-                <!--ProgressWheel:rimWidth="10dp" />-->
-
-            <com.closeby.clzby.customcontrol.CustomFontTextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/AppColor"
-                android:textSize="25dp"
-                android:textStyle="bold"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_gravity="center_vertical"
-                android:text="Total Likes"
-                android:padding="10dp"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                >
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/AppColor"
+                    android:textSize="20dp"
+                    android:gravity="left|center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:text="Total Likes"
+                    android:padding="10dp"
+                    />
 
 
-            <!--<com.todddavies.components.progressbar.ProgressWheel-->
-                <!--android:id="@+id/pinLike"-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--ProgressWheel:text="230"-->
-                <!--ProgressWheel:textColor="@color/AppColor"-->
-                <!--ProgressWheel:textSize="30dp"-->
-                <!--ProgressWheel:rimColor="@color/AppColor"-->
-                <!--ProgressWheel:barLength="60dp"-->
-                <!--ProgressWheel:barColor="@color/AppColor"-->
-                <!--ProgressWheel:barWidth="5dp"-->
-                <!--ProgressWheel:rimWidth="10dp" />-->
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/lbLikes"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textColor="@color/AppColor"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="120"
+                    android:padding="10dp"
+                    android:lines="1"
+                    android:background="@drawable/circle_bg"/>
 
-            <com.closeby.clzby.customcontrol.CustomFontTextView
-                android:id="@+id/lbLikes"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:textColor="@color/AppColor"
-                android:textSize="35dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:text="0"
-                android:padding="10dp"
-                android:background="@drawable/circle_bg"/>
+            </LinearLayout>
 
-            <com.closeby.clzby.customcontrol.CustomFontTextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/AppColor"
-                android:textSize="25dp"
-                android:textStyle="bold"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_gravity="center_vertical"
-                android:text="Total Messages"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="20dp"
+                >
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/AppColor"
+                    android:textSize="20dp"
+                    android:gravity="left|center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:text="Total Messages"
+                    android:padding="10dp"
+                    />
 
 
-            <!--<com.todddavies.components.progressbar.ProgressWheel-->
-                <!--android:id="@+id/pinMessages"-->
-                <!--android:layout_width="200dp"-->
-                <!--android:layout_height="200dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--ProgressWheel:text="230"-->
-                <!--ProgressWheel:textColor="@color/AppColor"-->
-                <!--ProgressWheel:textSize="30dp"-->
-                <!--ProgressWheel:rimColor="@color/AppColor"-->
-                <!--ProgressWheel:barLength="60dp"-->
-                <!--ProgressWheel:barColor="@color/AppColor"-->
-                <!--ProgressWheel:barWidth="5dp"-->
-                <!--ProgressWheel:rimWidth="10dp" />-->
-            <com.closeby.clzby.customcontrol.CustomFontTextView
-                android:id="@+id/lbMessages"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:textColor="@color/AppColor"
-                android:textSize="35dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:text="0"
-                android:padding="10dp"
-                android:background="@drawable/circle_bg"/>
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/lbMessages"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:textColor="@color/AppColor"
+                    android:textSize="30dp"
+                    android:gravity="center"
+                    android:text="120"
+                    android:padding="10dp"
+                    android:lines="1"
+                    android:background="@drawable/circle_bg"/>
+
+            </LinearLayout>
+
+
+
+
 
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</FrameLayout>

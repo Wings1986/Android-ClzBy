@@ -3,7 +3,125 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@android:color/white"
     android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="157dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/logo"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etEmail"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_round_bg"
+                android:textSize="15dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/GrayColor"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/AppColor" />
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etPassword"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_round_bg"
+                android:textSize="15dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColorHint="@color/GrayColor"
+                android:password="true"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/AppColor" />
+
+        </LinearLayout>
+
+
+        <com.closeby.clzby.customcontrol.CustomFontButton
+            android:id="@+id/btnLogin"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:text="Sign In"
+            android:layout_gravity="center"
+            android:textColor="@color/White"
+            android:background="@drawable/button_round_blue_bg" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp">
+            <Button
+                android:id="@+id/btnFacebook"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_fb" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.closeby.clzby.customcontrol.CustomFontButton
+                android:id="@+id/btnHelp"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="Help?"
+                android:layout_gravity="top|left"
+                android:textColor="@color/AppColor"
+                android:background="@android:color/transparent"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontButton
+                android:id="@+id/btnRegister"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:text="New User"
+                android:layout_gravity="center"
+                android:textColor="@color/White"
+                android:background="@drawable/button_round_blue_bg"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontButton
+                android:id="@+id/btnSkip"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="SKIP"
+                android:layout_gravity="top|right"
+                android:textColor="@color/AppColor"
+                android:background="@android:color/transparent"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

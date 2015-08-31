@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,26 +7,52 @@
     android:orientation="vertical">
 
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchView" />
+    <!--<com.handmark.pulltorefresh.library.PullToRefreshStaggeredView-->
+        <!--xmlns:ptr="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/gridview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:numColumns="2"-->
+        <!--android:horizontalSpacing="4dip"-->
+        <!--android:padding="4dip"-->
+        <!--android:stretchMode="columnWidth"-->
+        <!--android:verticalSpacing="4dip"-->
+        <!--app:column_count="2"-->
+        <!--app:item_margin="8dp"-->
+        <!--ptr:ptrMode="both" />-->
 
-    <com.handmark.pulltorefresh.library.PullToRefreshStaggeredView
-        xmlns:ptr="http://schemas.android.com/apk/res-auto"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/gridview"
+    <com.huewu.pla.lib.MultiColumnPullToRefreshListView
+        xmlns:pla="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:numColumns="2"
-        android:horizontalSpacing="4dip"
-        android:padding="4dip"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="4dip"
-        app:column_count="2"
-        app:item_margin="8dp"
-        ptr:ptrMode="both" />
+        android:id="@+id/gridView"
+        pla:plaColumnNumber="2"
+        pla:plaLandscapeColumnNumber="3" />
 
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/AppColor">
 
-</LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:id="@+id/searchView"
+            android:background="@drawable/search_round_white_bg"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:hint="Search"
+            android:textColorHint="@color/LineColor"
+            android:textColor="@color/AppColor"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+</FrameLayout>

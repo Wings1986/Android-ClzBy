@@ -15,6 +15,33 @@
 
         <FrameLayout
             android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <Button
+                android:id="@+id/btnSetting"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left|center_vertical"
+                android:background="@drawable/icon_setting"/>
+
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_edit_blue"/>
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/icon_trash"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
@@ -25,10 +52,11 @@
                 />
 
             <FrameLayout
-                android:layout_margin="10dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/circle"
+                android:layout_gravity="top|right"
+                android:layout_margin="5dp"
                 >
                 <LinearLayout
                     android:id="@+id/specialOfferView"
@@ -37,13 +65,24 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:visibility="gone">
-                    <TextView
-                        android:id="@+id/tvDelayOrginPrice"
+                    <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$300"
-                        android:textColor="@android:color/white"
-                        android:textSize="10dp"/>
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tvDelayOrginPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="$300"
+                            android:textColor="@android:color/white"
+                            android:textSize="6dp"
+                            android:lines="1"/>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="1dp"
+                            android:background="@color/LineColor"
+                            android:layout_gravity="center"/>
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/tvDelaySpecialPrice"
@@ -52,8 +91,8 @@
                         android:layout_marginTop="1dp"
                         android:text="$300"
                         android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:textSize="12dp"/>
+                        android:lines="1"
+                        android:textSize="8dp"/>
 
                 </LinearLayout>
 
@@ -64,34 +103,13 @@
                     android:layout_gravity="center"
                     android:text="$300"
                     android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:textSize="12dp"/>
+                    android:lines="1"
+                    android:textSize="8dp"
+                    android:visibility="visible"/>
 
             </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_gravity="top|right"
-                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnEdit"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/icon_edit_blue"/>
-                <Button
-                    android:id="@+id/btnSetting"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/icon_setting"/>
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/icon_trash"/>
-            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/ckbEnable"
@@ -107,93 +125,122 @@
 
         </FrameLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivLike"
+                android:layout_width="20dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/like_button_tapped"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/tvLike"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textSize="12dp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="2dp"
+                android:textColor="@color/AppBackColor"/>
+
+            <Button
+                android:id="@+id/btnMap"
+                android:layout_width="20dp"
+                android:layout_height="26dp"
+                android:padding="3dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/icon_logo"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LineColor"
+            android:layout_margin="1dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/tvTagLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/AppBackColor"
+                android:layout_marginTop="5dp"
+                android:textSize="11dp"
+                android:text="Tag Line"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/tvDealName"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/AppColor"
+                android:textSize="14dp"
+                android:text="Deal Name"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontTextView
+                android:id="@+id/tvDealDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:textColor="@color/AppBackColor"
+                android:textSize="11dp"
+                android:text="Deal Description"/>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <com.closeby.clzby.customcontrol.CustomFontTextView
-                    android:id="@+id/tvTagLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="5dp"
-                    android:textSize="12dp"
-                    android:text="Tag Line"/>
-
-                <com.closeby.clzby.customcontrol.CustomFontTextView
-                    android:id="@+id/tvDealName"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="7dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:text="Deal Name"/>
-
-                <com.closeby.clzby.customcontrol.CustomFontTextView
-                    android:id="@+id/tvDealDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="3dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="12dp"
-                    android:text="Deal Description"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
 
                 <com.closeby.clzby.customcontrol.CustomFontTextView
                     android:id="@+id/tvSubCategory"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/AppBackColor"
                     android:textSize="10dp"
                     android:text="Sub Category"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal">
 
                 <LinearLayout
                     android:id="@+id/decayDurationView"
-                     android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:background="@drawable/circle">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="3dp">
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_marginRight="3dp"
+                        android:src="@drawable/icon_timer"/>
 
                     <TextView
                         android:id="@+id/tvDecayDuration"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Expired"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:textSize="10dp"/>
+                        android:textColor="@color/AppBackColor"
+                        android:textSize="8dp"/>
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/btnMap"
-                    android:layout_width="30dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="3dp"
-                    android:background="@drawable/icon_logo"/>
             </LinearLayout>
 
         </LinearLayout>

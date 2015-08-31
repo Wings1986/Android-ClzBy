@@ -15,6 +15,8 @@ import com.closeby.clzby.fragment.SpecialDealFragment;
 import com.closeby.clzby.fragment.StandardDealFragment;
 import com.closeby.clzby.model.ProductItem;
 
+import org.json.JSONArray;
+
 public class ChooseInterestActivity extends FragmentActivity {
 
 	TextView tvTitle = null;
@@ -43,8 +45,7 @@ public class ChooseInterestActivity extends FragmentActivity {
 			public void onClick(View view) {
 				if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
 					getSupportFragmentManager().popBackStack();
-				}
-				else {
+				} else {
 					onBackPressed();
 				}
 			}
@@ -53,16 +54,6 @@ public class ChooseInterestActivity extends FragmentActivity {
 		tvTitle = (TextView) findViewById(R.id.nav_title);
 
 
-		TextView btnDone = (TextView) findViewById(R.id.nav_done);
-		btnDone.setOnTouchListener(CustomButtonTouchListener.getInstance());
-		btnDone.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-				newFragment.clickDone();
-
-			}
-		});
 	}
 
 	public void setTitle(String title) {

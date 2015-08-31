@@ -23,19 +23,21 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Adapter;
 
 import com.huewu.pla.lib.DebugUtil;
 
 
 /**
- * An AdapterView is a view whose children are determined by an {@link android.widget.Adapter}.
+ * An AdapterView is a view whose children are determined by an {@link Adapter}.
  *
  * <p>
  * See {@link ListView}, {@link GridView}, {@link Spinner} and
@@ -44,13 +46,13 @@ import com.huewu.pla.lib.DebugUtil;
 public abstract class PLA_AdapterView<T extends Adapter> extends ViewGroup {
     
 	/**
-	 * The item view type returned by {@link android.widget.Adapter#getItemViewType(int)} when
+	 * The item view type returned by {@link Adapter#getItemViewType(int)} when
 	 * the adapter does not want the item's view recycled.
 	 */
 	public static final int ITEM_VIEW_TYPE_IGNORE = -1;
     
 	/**
-	 * The item view type returned by {@link android.widget.Adapter#getItemViewType(int)} when
+	 * The item view type returned by {@link Adapter#getItemViewType(int)} when
 	 * the item is a header or footer.
 	 */
 	public static final int ITEM_VIEW_TYPE_HEADER_OR_FOOTER = -2;
@@ -64,11 +66,10 @@ public abstract class PLA_AdapterView<T extends Adapter> extends ViewGroup {
 	/**
 	 * The offset in pixels from the top of the AdapterView to the top
 	 * of the view to select during the next layout.
-     */
-    int mSpecificTop;
-    int[] mSpecificTops;
-
-    /**
+	 */
+	int mSpecificTop;
+    
+	/**
 	 * Position from which to start looking for mSyncRowId
 	 */
 	int mSyncPosition;
@@ -358,11 +359,11 @@ public abstract class PLA_AdapterView<T extends Adapter> extends ViewGroup {
     
 	/**
 	 * Extra menu information provided to the
-	 * {@link android.view.View.OnCreateContextMenuListener#onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu.ContextMenuInfo) }
+	 * {@link android.view.View.OnCreateContextMenuListener#onCreateContextMenu(ContextMenu, View, ContextMenuInfo) }
 	 * callback when a context menu is brought up for this AdapterView.
 	 *
 	 */
-	public static class AdapterContextMenuInfo implements ContextMenuInfo {
+	public static class AdapterContextMenuInfo implements ContextMenu.ContextMenuInfo {
         
 		public AdapterContextMenuInfo(View targetView, int position, long id) {
 			this.targetView = targetView;

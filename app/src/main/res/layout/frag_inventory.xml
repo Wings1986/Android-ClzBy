@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/menu_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BackgroundColor"
     android:orientation="vertical">
 
-
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchView"
-        android:queryHint="Search"/>
 
     <com.huewu.pla.lib.MultiColumnListView
         xmlns:pla="http://schemas.android.com/apk/res-auto"
@@ -21,4 +15,27 @@
         pla:plaColumnNumber="2"
         pla:plaLandscapeColumnNumber="3" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/AppColor">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:id="@+id/searchView"
+            android:background="@drawable/search_round_white_bg"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:hint="Search"
+            android:textColorHint="@color/LineColor"
+            android:textColor="@color/AppColor"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+</FrameLayout>

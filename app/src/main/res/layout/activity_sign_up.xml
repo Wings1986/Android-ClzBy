@@ -2,6 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background" >
+    android:background="@color/White"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/btn_back_login" />
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:background="@drawable/logo"
+            android:layout_gravity="center_horizontal"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/viewBusiness"
+            layout="@layout/tab_signup_business_"/>
+        <include
+            android:id="@+id/viewUser"
+            layout="@layout/tab_signup_user_"/>
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -14,9 +14,10 @@
 
     <Button
         android:id="@+id/btnRouter"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/icon_goto_map"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="15dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/get_direct_back"
+        android:layout_gravity="bottom"
+        />
+    
 </FrameLayout>

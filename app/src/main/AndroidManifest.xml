@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="com.closeby.clzby.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <!-- Declaration that this app is usable on phones with Bluetooth Low Energy. -->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>

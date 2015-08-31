@@ -39,8 +39,19 @@
                     android:gravity="left|center_vertical"
                     android:padding="5dp"
                     android:text="Business name"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@color/AppColor"
+                    android:textSize="15dp"/>
+
+                <com.closeby.clzby.customcontrol.CustomFontTextView
+                    android:id="@+id/tvBusinessCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left|center_vertical"
+                    android:padding="5dp"
+                    android:text="Business name"
+                    android:textColor="@android:color/black"
+                    android:textSize="10dp"/>
 
                 <com.closeby.clzby.customcontrol.CustomFontTextView
                     android:id="@+id/tvBusinessAddress"
@@ -50,18 +61,8 @@
                     android:gravity="left|center_vertical"
                     android:padding="5dp"
                     android:text="Business name"
-                    android:textColor="@android:color/black"/>
-
-                <com.closeby.clzby.customcontrol.CustomFontTextView
-                    android:id="@+id/tvBusinessCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="left|center_vertical"
-                    android:padding="5dp"
-                    android:textStyle="italic"
-                    android:text="Business name"
-                    android:textColor="@color/LineColor"/>
+                    android:textColor="@color/AppColor"
+                    android:textSize="10dp"/>
 
             </LinearLayout>
 
@@ -69,20 +70,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="right">
-                <ImageView
-                    android:id="@+id/ivLike"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/like_button_tapped"/>
+                android:layout_gravity="right|center_vertical">
+
                 <com.closeby.clzby.customcontrol.CustomFontTextView
                     android:id="@+id/tvLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20"
-                    android:textSize="12dp"
+                    android:text="20 Likes"
+                    android:textSize="8dp"
                     android:paddingLeft="2dp"
-                    android:textColor="@color/AppColor"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/AppBackColor"/>
             </LinearLayout>
 
         </FrameLayout>

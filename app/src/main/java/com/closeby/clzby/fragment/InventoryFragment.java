@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,6 +35,7 @@ import com.closeby.clzby.customcontrol.DialogHelper;
 import com.closeby.clzby.listener.ImageViewLayoutSize;
 import com.closeby.clzby.listener.OnLayoutSizeListener;
 import com.huewu.pla.lib.MultiColumnListView;
+import com.huewu.pla.lib.internal.PLA_AbsListView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -57,6 +61,9 @@ public class InventoryFragment extends BaseFragment {
 
     int imageViewWidth = 300;
 
+    LinearLayout searchLayout;
+    private int oldScrolly;
+
     public static InventoryFragment newInstance() {
         InventoryFragment fragment = new InventoryFragment();
         Bundle args = new Bundle();
@@ -78,37 +85,65 @@ public class InventoryFragment extends BaseFragment {
 
     private void initView(View view) {
 
+        searchLayout = (LinearLayout) view.findViewById(R.id.searchLayout);
+        searchLayout.setVisibility(View.INVISIBLE);
+
         mListView = (MultiColumnListView) view.findViewById(R.id.gridView);
         mAdapter = new MyCustomAdapter();
         mListView.setAdapter(mAdapter);
 
-
-        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mListView.setOnScrollListener(new PLA_AbsListView.OnScrollListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onScrollStateChanged(PLA_AbsListView view, int scrollState) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public void onScroll(PLA_AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                View view = absListView.getChildAt(0);
+                int scrolly = (view == null) ? 0 : -view.getTop() + absListView.getFirstVisiblePosition() * view.getHeight();
+                int margin = 10;
+
+                if (scrolly > oldScrolly + margin) {
+                    Log.d("", "SCROLL_UP");
+                    oldScrolly = scrolly;
+
+                    searchLayout.setVisibility(View.VISIBLE);
+
+                } else if (scrolly < oldScrolly - margin) {
+                    Log.d("", "SCROLL_DOWN");
+                    oldScrolly = scrolly;
+
+                    searchLayout.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        final EditText searchView = (EditText) view.findViewById(R.id.searchView);
+        searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (arrayData == null) {
-                    return false;
+                    return;
                 }
 
                 arrayDataSource = MyJSON.clearJSONArray(arrayDataSource);
 
+                String newText = searchView.getText().toString();
 
                 if (newText.length() < 1) {
                     arrayDataSource = arrayData;
-                }
-                else {
-                    for (int i = 0 ; i < arrayData.length() ; i ++) {
+                } else {
+                    for (int i = 0; i < arrayData.length(); i++) {
 
                         try {
                             JSONObject obj = arrayData.getJSONObject(i);
-
 
                             String productName = obj.getString("ProductName");
                             String businessName = obj.getString("ProductDescription");
@@ -120,7 +155,7 @@ public class InventoryFragment extends BaseFragment {
 
                                 arrayDataSource = MyJSON.addJSONObject(arrayDataSource, obj);
                             }
-                        }catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -128,58 +163,67 @@ public class InventoryFragment extends BaseFragment {
 
                 mAdapter.setItem(arrayDataSource);
                 mAdapter.notifyDataSetChanged();
-
-                return false;
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
         });
+
 
         // network
 
         final Dialog waitDialog = DialogHelper.getWaitDialog(getActivity());
-        waitDialog.show();
+            waitDialog.show();
 
-        AndroidHttpClient httpClient = new AndroidHttpClient(Global.kServerURL);
-        httpClient.setMaxRetries(3);
-        ParameterMap params = httpClient.newParams()
-                .add("guid", Global.kGUID)
-                .add("UserID", AppData.getInstance().loadLoginUserID());
+            AndroidHttpClient httpClient = new AndroidHttpClient(Global.kServerURL);
+            httpClient.setMaxRetries(3);
+            ParameterMap params = httpClient.newParams()
+                    .add("guid", Global.kGUID)
+                    .add("UserID", AppData.getInstance().loadLoginUserID());
 
-        httpClient.get("/GetAllBusinessProductsAdmin.aspx", params, new AsyncCallback() {
+            httpClient.get("/GetAllBusinessProductsAdmin.aspx",params,new
 
-            @Override
-            public void onComplete(HttpResponse httpResponse) {
+            AsyncCallback() {
 
-                waitDialog.dismiss();
+                @Override
+                public void onComplete (HttpResponse httpResponse){
 
-                try {
-                    JSONObject result = new JSONObject(httpResponse.getBodyAsString());
+                    waitDialog.dismiss();
 
-                    if (result.getString("Success").equals("Success")) {
+                    try {
+                        JSONObject result = new JSONObject(httpResponse.getBodyAsString());
 
-                        arrayData = result.getJSONArray("Data");
-                        arrayDataSource = arrayData;
+                        if (result.getString("Success").equals("Success")) {
 
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // TODO Auto-generated method stub
+                            arrayData = result.getJSONArray("Data");
+                            arrayDataSource = arrayData;
 
-                                mAdapter.setItem(arrayDataSource);
-                                mAdapter.notifyDataSetChanged();
-                            }
-                        });
-                    } else {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // TODO Auto-generated method stub
 
-                        DialogHelper.showToast(getActivity(), result.getString("message"));
+                                    mAdapter.setItem(arrayDataSource);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        } else {
+
+                            DialogHelper.showToast(getActivity(), result.getString("message"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+
                 }
-
             }
-        });
 
-    }
+            );
+
+        }
 
     public class MyCustomAdapter extends BaseAdapter {
 
@@ -228,6 +272,9 @@ public class InventoryFragment extends BaseFragment {
                 holder.subDecayView = (LinearLayout) convertView.findViewById(R.id.specialOfferView);
                 holder.lbDecayOriginPrice = (TextView) convertView.findViewById(R.id.tvDelayOrginPrice);
                 holder.lbDecaySpecialPrice = (TextView) convertView.findViewById(R.id.tvDelaySpecialPrice);
+
+                holder.ivLike = (ImageView) convertView.findViewById(R.id.ivLike);
+                holder.lbLike = (CustomFontTextView) convertView.findViewById(R.id.tvLike);
 
                 holder.lbTagLine= (CustomFontTextView) convertView.findViewById(R.id.tvTagLine);
                 holder.lbDealName= (CustomFontTextView) convertView.findViewById(R.id.tvDealName);
@@ -338,12 +385,23 @@ public class InventoryFragment extends BaseFragment {
                     try {
                         holder.lbOriginPrice.setVisibility(View.GONE);
                         holder.subDecayView.setVisibility(View.VISIBLE);
-                        holder.subDecayTimeView.setVisibility(View.VISIBLE);
 
                         holder.lbDecayOriginPrice.setText("$" + item.getInt("OrigionalPrice"));
                         holder.lbDecaySpecialPrice.setText("$" + item.getInt("SpecialPrice"));
 
-                        holder.lbDecayDuration.setText(Global.getLeftTime(item.getString("DecayEndTime")));
+                        int enable = 0;
+                        try {
+                            enable = item.getInt("CurrentState");
+                        } catch (Exception e) {e.printStackTrace();}
+
+                        if (enable != 0) {
+                            holder.subDecayTimeView.setVisibility(View.VISIBLE);
+                            holder.lbDecayDuration.setText(Global.getLeftTime(item.getString("DecayEndTime")));
+                        } else {
+                            holder.subDecayTimeView.setVisibility(View.GONE);
+                        }
+
+
                     } catch (Exception e) {}
                 }
                 else {
@@ -351,6 +409,19 @@ public class InventoryFragment extends BaseFragment {
                     holder.subDecayView.setVisibility(View.GONE);
                     holder.subDecayTimeView.setVisibility(View.GONE);
                 }
+
+                try {
+                    int liked = 0;
+                    int likes = 0;
+                    try {
+                        liked = item.getInt("CurrentUserHasLiked");
+                        likes = item.getInt("NumberOfLikes");
+                    } catch (Exception e) {e.printStackTrace();}
+
+                    holder.ivLike.setImageResource(liked == 1 ? R.drawable.like_button_tapped : R.drawable.like_button);
+                    holder.lbLike.setText("" + likes);
+
+                } catch (Exception e) {e.printStackTrace();}
 
                 try {
 
@@ -587,6 +658,9 @@ public class InventoryFragment extends BaseFragment {
         LinearLayout subDecayView;
         TextView lbDecayOriginPrice;
         TextView lbDecaySpecialPrice;
+
+        ImageView ivLike;
+        CustomFontTextView lbLike;
 
         CustomFontTextView lbTagLine;
         CustomFontTextView lbDealName;

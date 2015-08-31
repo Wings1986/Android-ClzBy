@@ -5,3 +5,8 @@
 .DS_Store
 /build
 /captures
+/CustomMapView/build
+/HeaderListView/build
+/PinterestLikeAdapterView/build
+/PullToRefresh/build
+/SlidingMenu/build

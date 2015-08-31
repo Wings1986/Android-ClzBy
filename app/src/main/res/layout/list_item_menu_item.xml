@@ -29,7 +29,6 @@
             android:gravity="left|center_vertical"
             android:layout_marginLeft="15dp"
             android:text="Business name"
-            android:textStyle="bold"
             android:textColor="@android:color/white"/>
 
     </LinearLayout>

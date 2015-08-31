@@ -32,6 +32,7 @@ import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ListAdapter;
+import android.widget.WrapperListAdapter;
 
 import com.huewu.pla.R;
 import com.huewu.pla.lib.DebugUtil;
@@ -50,7 +51,7 @@ import java.util.ArrayList;
 
 /**
  * A view that shows items in a vertically scrolling list. The items
- * come from the {@link android.widget.ListAdapter} associated with this view.
+ * come from the {@link ListAdapter} associated with this view.
  *
  * <p>See the <a href="{@docRoot}resources/tutorials/views/hello-listview.html">List View
  * tutorial</a>.</p>
@@ -89,14 +90,14 @@ public class PLA_ListView extends PLA_AbsListView {
     public class FixedViewInfo {
         /** The view to add to the list */
         public View view;
-        /** The data backing the view. This is returned from {@link android.widget.ListAdapter#getItem(int)}. */
+        /** The data backing the view. This is returned from {@link ListAdapter#getItem(int)}. */
         public Object data;
         /** <code>true</code> if the fixed view should be selectable in the list */
         public boolean isSelectable;
     }
 
-    private ArrayList<FixedViewInfo> mHeaderViewInfos = new ArrayList<FixedViewInfo>();
-    private ArrayList<FixedViewInfo> mFooterViewInfos = new ArrayList<FixedViewInfo>();
+    private ArrayList<FixedViewInfo> mHeaderViewInfos = new ArrayList<PLA_ListView.FixedViewInfo>();
+    private ArrayList<FixedViewInfo> mFooterViewInfos = new ArrayList<PLA_ListView.FixedViewInfo>();
 
     Drawable mDivider;
     int mDividerHeight;
@@ -118,7 +119,6 @@ public class PLA_ListView extends PLA_AbsListView {
     // used for temporary calculations.
     private final Rect mTempRect = new Rect();
     private Paint mDividerPaint;
-    private Paint mContentPaint = new Paint();
 
     public PLA_ListView(Context context) {
         this(context, null);
@@ -161,12 +161,6 @@ public class PLA_ListView extends PLA_AbsListView {
 
         mHeaderDividersEnabled = a.getBoolean(R.styleable.ListView_headerDividersEnabled, true);
         mFooterDividersEnabled = a.getBoolean(R.styleable.ListView_footerDividersEnabled, true);
-
-        if (a.hasValue(R.styleable.ListView_plaContentBackground)) {
-            int contentBackgroundColor = a.getColor(R.styleable.ListView_plaContentBackground, 0);
-            mContentPaint = new Paint();
-            mContentPaint.setColor(contentBackgroundColor);
-        }
 
         a.recycle();
     }
@@ -322,7 +316,7 @@ public class PLA_ListView extends PLA_AbsListView {
     public boolean removeHeaderView(View v) {
         if (mHeaderViewInfos.size() > 0) {
             boolean result = false;
-            if (mAdapter != null && ((PLA_HeaderViewListAdapter) mAdapter).removeHeader(v)) {
+            if (((PLA_HeaderViewListAdapter) mAdapter).removeHeader(v)) {
                 mDataSetObserver.onChanged();
                 result = true;
             }
@@ -399,7 +393,7 @@ public class PLA_ListView extends PLA_AbsListView {
     public boolean removeFooterView(View v) {
         if (mFooterViewInfos.size() > 0) {
             boolean result = false;
-            if (mAdapter != null && ((PLA_HeaderViewListAdapter) mAdapter).removeFooter(v)) {
+            if (((PLA_HeaderViewListAdapter) mAdapter).removeFooter(v)) {
                 mDataSetObserver.onChanged();
                 result = true;
             }
@@ -411,12 +405,12 @@ public class PLA_ListView extends PLA_AbsListView {
 
     /**
      * Returns the adapter currently in use in this ListView. The returned adapter
-     * might not be the same adapter passed to {@link #setAdapter(android.widget.ListAdapter)} but
-     * might be a {@link android.widget.WrapperListAdapter}.
+     * might not be the same adapter passed to {@link #setAdapter(ListAdapter)} but
+     * might be a {@link WrapperListAdapter}.
      *
      * @return The adapter currently used to display data in this ListView.
      *
-     * @see #setAdapter(android.widget.ListAdapter)
+     * @see #setAdapter(ListAdapter)
      */
     @Override
     public ListAdapter getAdapter() {
@@ -426,7 +420,7 @@ public class PLA_ListView extends PLA_AbsListView {
     /**
      * Sets the data behind this ListView.
      *
-     * The adapter passed to this method may be wrapped by a {@link android.widget.WrapperListAdapter},
+     * The adapter passed to this method may be wrapped by a {@link WrapperListAdapter},
      * depending on the ListView features currently in use. For instance, adding
      * headers and/or footers will cause the adapter to be wrapped.
      *
@@ -653,11 +647,12 @@ public class PLA_ListView extends PLA_AbsListView {
     protected void fillGap(boolean down) {
         final int count = getChildCount();
         if (down) {
-            fillDown(mFirstPosition + count, getFillChildBottom() + mDividerHeight);
+            fillDown(mFirstPosition + count, getItemTop(mFirstPosition + count));
+            onAdjustChildViews( down );
         } else {
-            fillUp(mFirstPosition - 1, getFillChildTop());
+            fillUp(mFirstPosition - 1, getItemBottom(mFirstPosition - 1));
+            onAdjustChildViews( down );
         }
-        onAdjustChildViews(down);
     }
 
     /**
@@ -671,16 +666,21 @@ public class PLA_ListView extends PLA_AbsListView {
      * @return The view that is currently selected, if it happens to be in the
      *         range that we draw.
      */
-    private View fillDown(int pos, int nextTop) {
+    private View fillDown(int pos, int top) {
+
         DebugUtil.i("fill down: " + pos);
 
-        int end = getBottom() - getTop() - mListPadding.bottom;
-        while (nextTop < end && pos < mItemCount) {
+        //int end = (mBottom - mTop) - mListPadding.bottom;
+        int end = (getBottom() - getTop()) - mListPadding.bottom;
+        int childTop = getFillChildBottom() + mDividerHeight;
+
+        while (childTop < end && pos < mItemCount) {
             // is this the selected item?
             makeAndAddView(pos, getItemTop(pos), true, false);
             pos++;
-            nextTop = getFillChildBottom() + mDividerHeight;
+            childTop = getFillChildBottom() + mDividerHeight;
         }
+
         return null;
     }
 
@@ -694,20 +694,22 @@ public class PLA_ListView extends PLA_AbsListView {
      *
      * @return The view that is currently selected
      */
-    private View fillUp(int pos, int nextBottom) {
+    private View fillUp(int pos, int bottom) {
 
         DebugUtil.i("fill up: " + pos);
 
         int end = mListPadding.top;
-        while (nextBottom > end && pos >= 0) {
+        int childBottom = getFillChildTop();
+        while (childBottom > end && pos >= 0) {
             // is this the selected item?
             makeAndAddView(pos, getItemBottom(pos), false, false);
             //	nextBottom = child.getTop() - mDividerHeight;
             pos--;
-            nextBottom = getItemBottom(pos);
+            childBottom = getItemBottom(pos);
         }
 
         mFirstPosition = pos + 1;
+
         return null;
     }
 
@@ -815,7 +817,7 @@ public class PLA_ListView extends PLA_AbsListView {
      * current height reaches maxHeight.
      *
      * @param widthMeasureSpec The width measure spec to be given to a child's
-     *            {@link android.view.View#measure(int, int)}.
+     *            {@link View#measure(int, int)}.
      * @param startPosition The position of the first child to be shown.
      * @param endPosition The (inclusive) position of the last child to be
      *            shown. Specify {@link #NO_POSITION} if the last child should be
@@ -938,15 +940,16 @@ public class PLA_ListView extends PLA_AbsListView {
             DebugUtil.i("fill specific: " + position + ":" + top);
 
         View temp = makeAndAddView(position, top, true, false);
-        // Possibly changed again in fillUp if we add rows above this one.
-        mFirstPosition = position;
 
+        // Possibly changed again in fillUp if we add rows above this one.
+
+        mFirstPosition = position;
         final int dividerHeight = mDividerHeight;
         if (!mStackFromBottom) {
-            fillUp(position - 1, getFillChildTop());
+            fillUp(position - 1, temp.getTop() - dividerHeight);
             // This will correct for the top of the first view not touching the top of the list
             adjustViewsUpOrDown();
-            fillDown(position + 1, getFillChildBottom() + mDividerHeight);
+            fillDown(position + 1, temp.getBottom() + dividerHeight);
             int childCount = getChildCount();
             if (childCount > 0) {
                 correctTooHigh(childCount);
@@ -955,7 +958,7 @@ public class PLA_ListView extends PLA_AbsListView {
             fillDown(position + 1, temp.getBottom() + dividerHeight);
             // This will correct for the bottom of the last view not touching the bottom of the list
             adjustViewsUpOrDown();
-            fillUp(position - 1, getFillChildTop());
+            fillUp(position - 1, temp.getTop() - dividerHeight);
             int childCount = getChildCount();
             if (childCount > 0) {
                 correctTooLow(childCount);
@@ -998,7 +1001,7 @@ public class PLA_ListView extends PLA_AbsListView {
 
             // Make sure we are 1) Too high, and 2) Either there are more rows above the
             // first row or the first row is scrolled off the top of the drawable area
-            if (bottomOffset > 0 && (mFirstPosition > 0 || firstTop < mListPadding.top)) {
+            if (bottomOffset > 0 && (mFirstPosition > 0 || firstTop < mListPadding.top))  {
                 if (mFirstPosition == 0) {
                     // Don't pull the top too far down
                     bottomOffset = Math.min(bottomOffset, mListPadding.top - firstTop);
@@ -1010,7 +1013,7 @@ public class PLA_ListView extends PLA_AbsListView {
                     // Fill the gap that was opened above mFirstPosition with more rows, if
                     // possible
                     int newFirstTop = getScrollChildTop();
-                    fillUp(mFirstPosition - 1, getFillChildTop());
+                    fillUp(mFirstPosition - 1, newFirstTop - mDividerHeight);
                     // Close up the remaining gap
                     adjustViewsUpOrDown();
                 }
@@ -1038,7 +1041,7 @@ public class PLA_ListView extends PLA_AbsListView {
             final int start = mListPadding.top;
 
             // This is bottom of our drawable area
-            final int end = (getBottom() - getTop()) - mListPadding.bottom;
+            final int end = (getBottom() -getTop()) - mListPadding.bottom;
 
             // This is how far the top edge of the first view is from the top of the drawable area
             int topOffset = firstTop - start;
@@ -1049,7 +1052,7 @@ public class PLA_ListView extends PLA_AbsListView {
             // Make sure we are 1) Too low, and 2) Either there are more rows below the
             // last row or the last row is scrolled off the bottom of the drawable area
             if (topOffset > 0) {
-                if (lastPosition < mItemCount - 1 || lastBottom > end) {
+                if (lastPosition < mItemCount - 1 || lastBottom > end)  {
                     if (lastPosition == mItemCount - 1) {
                         // Don't pull the bottom too far up
                         topOffset = Math.min(topOffset, lastBottom - end);
@@ -1059,7 +1062,7 @@ public class PLA_ListView extends PLA_AbsListView {
                     if (lastPosition < mItemCount - 1) {
                         // Fill the gap that was opened below the last position with more rows, if
                         // possible
-                        fillDown(lastPosition + 1, getFillChildBottom() + mDividerHeight);
+                        fillDown(lastPosition + 1, getFillChildTop() + mDividerHeight);
                         // Close up the remaining gap
                         adjustViewsUpOrDown();
                     }
@@ -1088,8 +1091,9 @@ public class PLA_ListView extends PLA_AbsListView {
                 return;
             }
 
-            int childrenTop = getFillChildBottom() + mDividerHeight;
-            int childrenBottom = getFillChildTop();
+            int childrenTop = mListPadding.top;
+            //int childrenBottom = mBottom - mTop - mListPadding.bottom;
+            int childrenBottom = getBottom() - getTop() - mListPadding.bottom;
 
             int childCount = getChildCount();
             int index = 0;
@@ -1153,12 +1157,7 @@ public class PLA_ListView extends PLA_AbsListView {
                     onLayoutSync(mSyncPosition);
                     // Clear out old views
                     detachAllViewsFromParent();
-                    if (mSpecificTops != null) {
-                        fillSynced(mSyncPosition, mSpecificTops);
-                        mSpecificTops = null;
-                    } else {
-                        fillSpecific(mSyncPosition, mSpecificTop);
-                    }
+                    fillSpecific(mSyncPosition, mSpecificTop);
                     onLayoutSyncFinished(mSyncPosition);
                     break;
                 case LAYOUT_FORCE_BOTTOM:
@@ -1227,14 +1226,6 @@ public class PLA_ListView extends PLA_AbsListView {
         }
     }
 
-    private void fillSynced(int position, int[] specificTops) {
-        for (int i = 0; i < specificTops.length; i++) {
-            makeAndAddView(position + i, specificTops[i], true, false);
-            adjustViewsUpOrDown();
-        }
-        mFirstPosition = position;
-    }
-
     /**
      * Obtain the view and add it to our list of children. The view can be made
      * fresh, converted from an unused view, or used as is if it was in the
@@ -1244,6 +1235,7 @@ public class PLA_ListView extends PLA_AbsListView {
      * @param childrenBottomOrTop Top or bottom edge of the view to add
      * @param flow If flow is true, align top edge to y. If false, align bottom
      *        edge to y.
+     * @param childrenLeft Left edge where children should be positioned
      * @param selected Is this position selected?
      * @return View that was added
      */
@@ -1524,7 +1516,7 @@ public class PLA_ListView extends PLA_AbsListView {
      * Go to the last or first item if possible (not worrying about panning across or navigating
      * within the internal focus of the currently selected item.)
      *
-     * @param direction either {@link android.view.View#FOCUS_UP} or {@link android.view.View#FOCUS_DOWN}
+     * @param direction either {@link View#FOCUS_UP} or {@link View#FOCUS_DOWN}
      *
      * @return whether selection was moved
      */
@@ -1756,8 +1748,6 @@ public class PLA_ListView extends PLA_AbsListView {
         final boolean drawOverscrollFooter = overscrollFooter != null;
         final boolean drawDividers = dividerHeight > 0 && mDivider != null;
 
-        drawContentBackground(canvas);
-
         if (drawDividers || drawOverscrollHeader || drawOverscrollFooter) {
             // Only modify the top and bottom in the loop, we set the left and right here
             final Rect bounds = mTempRect;
@@ -1898,31 +1888,6 @@ public class PLA_ListView extends PLA_AbsListView {
         super.dispatchDraw(canvas);
     }
 
-    private void drawContentBackground(Canvas canvas) {
-        if (getHeaderViewsCount() > 0) {
-            Rect rect = mTempRect;
-            rect.left = getLeft();
-            rect.right = getRight();
-            View firstVisibleView = getChildAt(getFirstVisiblePosition());
-
-            if (isHeaderView(firstVisibleView)) {
-                View lastHeader = mHeaderViewInfos.get(mHeaderViewInfos.size() - 1).view;
-                rect.top = lastHeader.getBottom();
-            } else
-                rect.top = 0;
-            rect.bottom = getBottom();
-            canvas.drawRect(rect, mContentPaint);
-        }
-    }
-
-    private boolean isHeaderView(View view) {
-        for (FixedViewInfo info : mHeaderViewInfos) {
-            if (info.view == view)
-                return true;
-        }
-        return false;
-    }
-
     /**
      * Draws a divider for the given child in the given bounds.
      *
@@ -1988,7 +1953,7 @@ public class PLA_ListView extends PLA_AbsListView {
 
     /**
      * Sets the height of the divider that will be drawn between each item in the list. Calling
-     * this will override the intrinsic height as set by {@link #setDivider(android.graphics.drawable.Drawable)}
+     * this will override the intrinsic height as set by {@link #setDivider(Drawable)}
      *
      * @param height The new height of the divider in pixels.
      */
@@ -2159,7 +2124,7 @@ public class PLA_ListView extends PLA_AbsListView {
      * Sets the checked state of the specified position. The is only valid if
      * the choice mode has been set to {@link #CHOICE_MODE_SINGLE} or
      * {@link #CHOICE_MODE_MULTIPLE}.
-     *
+     * 
      * @param position The item whose checked state is to be checked
      * @param value The new checked state for the item
      */
@@ -2210,10 +2175,10 @@ public class PLA_ListView extends PLA_AbsListView {
     /**
      * Returns the set of checked items ids. The result is only valid if the
      * choice mode has not been set to {@link #CHOICE_MODE_NONE}.
-     *
+     * 
      * @return A new array which contains the id of each checked item in the
      *         list.
-     *
+     *         
      * @deprecated Use {@link #getCheckedItemIds()} instead.
      */
     @Deprecated
@@ -2229,8 +2194,8 @@ public class PLA_ListView extends PLA_AbsListView {
     /**
      * Returns the set of checked items ids. The result is only valid if the
      * choice mode has not been set to {@link #CHOICE_MODE_NONE} and the adapter
-     * has stable IDs. ({@link android.widget.ListAdapter#hasStableIds()} == {@code true})
-     *
+     * has stable IDs. ({@link ListAdapter#hasStableIds()} == {@code true})
+     * 
      * @return A new array which contains the id of each checked item in the
      *         list.
      */

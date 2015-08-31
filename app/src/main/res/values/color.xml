@@ -2,7 +2,9 @@
 <resources>
 
     <color name="AppColor">#00a3e8</color>
-    <color name="BackgroundColor">#333333</color>
+    <color name="BackgroundColor">#FFFFFF</color>
+    <color name="GrayColor">#888888</color>
+    <color name="AppBackColor">#4B4C4C</color>
 
     <color name="White">#FFFFFF</color>
     <color name="Black">#000000</color>

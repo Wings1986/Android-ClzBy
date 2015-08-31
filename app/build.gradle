@@ -49,4 +49,5 @@ dependencies {
     compile project(':HeaderListView')
     compile 'org.apache.httpcomponents:httpmime:4.5'
     compile(name:'estimote-sdk-preview', ext:'aar')
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
 }

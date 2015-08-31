@@ -40,7 +40,7 @@ public class Global {
 
 	public static String getLeftTime(String strEndTime) {
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z", Locale.US);
 			Date endTime = sdf.parse(strEndTime);
 
 			long distanceBetweenDates = endTime.getTime() - new Date().getTime();

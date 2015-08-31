@@ -11,15 +11,22 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="15dp"
-        android:background="@drawable/grid_deal_bg">
+        >
 
+        <ImageView
+            android:layout_width="115dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:layout_margin="10dp"
+            android:src="@drawable/logo"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical" >
 
             <com.closeby.clzby.customcontrol.CustomFontEdittext
@@ -31,12 +38,14 @@
                 android:textColorHint="#888888"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/Black" />
+                android:gravity="center"
+                android:textColor="@color/Black"
+                android:background="@android:color/transparent"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#888888" />
+                android:background="@color/AppColor" />
         </LinearLayout>
 
 
@@ -44,65 +53,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical" >
 
-            <com.closeby.clzby.customcontrol.CustomFontEdittext
-                android:id="@+id/etCategory"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:hint="Category"
-                android:textColorHint="#888888"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/Black" />
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#888888" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/icon_select_category"
+                    android:layout_gravity="right|center_vertical"/>
 
                 <com.closeby.clzby.customcontrol.CustomFontEdittext
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="$"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@color/Black" />
-
-                <com.closeby.clzby.customcontrol.CustomFontEdittext
-                    android:id="@+id/etPrice"
+                    android:id="@+id/etCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:hint="Price"
+                    android:hint="Category"
                     android:textColorHint="#888888"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@color/Black" />
-            </LinearLayout>
+                    android:gravity="center"
+                    android:textColor="@color/Black"
+                    android:background="@android:color/transparent"/>
+
+            </FrameLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#888888" />
+                android:background="@color/AppColor" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical" >
+
+            <com.closeby.clzby.customcontrol.CustomFontEdittext
+                android:id="@+id/etPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:hint="Price"
+                android:textColorHint="#888888"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:gravity="center"
+                android:textColor="@color/Black"
+                android:background="@android:color/transparent"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/AppColor" />
         </LinearLayout>
 
 
@@ -110,8 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:orientation="vertical" >
 
             <com.closeby.clzby.customcontrol.CustomFontEdittext
@@ -123,12 +134,14 @@
                 android:textColorHint="#888888"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/Black" />
+                android:gravity="center"
+                android:textColor="@color/Black"
+                android:background="@android:color/transparent"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#888888" />
+                android:background="@color/AppColor" />
         </LinearLayout>
 
 

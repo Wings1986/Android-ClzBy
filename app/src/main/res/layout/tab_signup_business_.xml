@@ -3,250 +3,259 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/White"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="30dp"
+        android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.closeby.clzby.customcontrol.CustomFontButton
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="Business"
+                android:layout_gravity="center"
+                android:textColor="@color/White"
+                android:background="@drawable/tab_select_bg"/>
+
+            <com.closeby.clzby.customcontrol.CustomFontButton
+                android:id="@+id/btnUser"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:text="User"
+                android:layout_gravity="center"
+                android:textColor="@color/GrayColor"
+                android:background="@drawable/tab_normal_bg"/>
+
+        </LinearLayout>
 
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:paddingTop="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
 
-                <com.closeby.clzby.customcontrol.CustomFontTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Please Enter Your Details"
-                    android:textColor="@color/White"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_business_name" />
+                    android:background="@drawable/back_business_name">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etBusinessName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Business Name"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_business_address" />
+                    android:background="@drawable/back_business_address">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etBusinessAddress"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Business Address"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_fullname" />
+                    android:background="@drawable/back_fullname">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etFullName"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Full Name"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_business_shop" />
+                    android:background="@drawable/back_business_shop">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etShopCenter"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Shopping Center"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_business_category" />
+                    android:background="@drawable/back_business_category">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etMainCategory"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Main Category"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_email" />
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/back_email">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_pwd" />
+                    android:background="@drawable/back_pwd">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Password"
+                        android:inputType="textPassword"
+                        android:textColorHint="@color/GrayColor"
                         android:maxLines="1"
-                        android:password="true"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+                    android:layout_width="225dp"
+                    android:layout_height="38dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="43dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/icon_contact" />
+                    android:background="@drawable/back_contact">
 
                     <com.closeby.clzby.customcontrol.CustomFontEdittext
                         android:id="@+id/etContactNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="center"
                         android:background="@android:color/transparent"
+                        android:textSize="15dp"
                         android:hint="Contact Number"
-                        android:maxLines="1"
                         android:inputType="phone"
+                        android:textColorHint="@color/GrayColor"
+                        android:maxLines="1"
                         android:singleLine="true"
-                        android:textColor="@color/White" />
-                </LinearLayout>
+                        android:textColor="@color/AppColor" />
+                </FrameLayout>
+
             </LinearLayout>
         </ScrollView>
 
         <com.closeby.clzby.customcontrol.CustomFontButton
             android:id="@+id/btnSubmit"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:text="Submit"
             android:textColor="@color/White"
-            android:background="@drawable/btn_background_blue" />
+            android:background="@drawable/button_round_blue_bg" />
 
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/btnSupport"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/btn_call_support" />
+        android:padding="5dp"
+        android:src="@drawable/icon_business_support"
+        android:background="@color/AppColor" />
 
 </LinearLayout>

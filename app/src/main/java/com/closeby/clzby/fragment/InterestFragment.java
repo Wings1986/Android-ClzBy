@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -23,6 +24,7 @@ import com.closeby.clzby.R;
 import com.closeby.clzby.activity.ChooseInterestActivity;
 import com.closeby.clzby.activity.Global;
 import com.closeby.clzby.activity.HomeActivity;
+import com.closeby.clzby.customcontrol.CustomButtonTouchListener;
 import com.closeby.clzby.customcontrol.CustomFontTextView;
 import com.closeby.clzby.customcontrol.DialogHelper;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -45,7 +47,7 @@ public class InterestFragment extends BaseFragment {
     HeaderListView mListView;
     private MyCustomAdapter mAdapter;
 
-    JSONArray arrayData = new JSONArray(), arrayDataSource = new JSONArray();
+    JSONArray arrayData = new JSONArray();
 
 
     public static InterestFragment newInstance() {
@@ -73,55 +75,120 @@ public class InterestFragment extends BaseFragment {
         mAdapter = new MyCustomAdapter();
         mListView.setAdapter(mAdapter);
 
-
-        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        Button btnSelAll = (Button) view.findViewById(R.id.btnSelAll);
+        btnSelAll.setOnTouchListener(CustomButtonTouchListener.getInstance());
+        btnSelAll.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+            public void onClick(View v) {
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                if (arrayData == null) {
-                    return false;
-                }
-
-                arrayDataSource = MyJSON.clearJSONArray(arrayDataSource);
-
-
-                if (newText.length() < 1) {
-                    arrayDataSource = arrayData;
-                }
-                else {
-                    for (int i = 0 ; i < arrayData.length() ; i ++) {
-
-                        try {
-                            JSONObject obj = arrayData.getJSONObject(i);
-
-
-                            String businessName = obj.getString("BusinessName");
-                            String categories = obj.getString("CategoryName");
-
-                            if ((businessName != null && businessName.toUpperCase().contains(newText.toUpperCase()))
-                                    || (categories != null && categories.toUpperCase().contains(newText.toUpperCase()))) {
-
-                                arrayDataSource = MyJSON.addJSONObject(arrayDataSource, obj);
-                            }
-                        }catch (Exception e) {
-                            e.printStackTrace();
+                try {
+                    for (int i = 0; i < arrayData.length(); i++) {
+                        JSONArray arryCategory = arrayData.getJSONObject(i).getJSONArray("SubCategoryIDS");
+                        for (int j = 0; j < arryCategory.length(); j++) {
+                            JSONObject subCategory = arryCategory.getJSONObject(j);
+                            subCategory.put("selected", true);
                         }
                     }
-                }
 
-                mAdapter.setItem(arrayDataSource);
+
+                } catch (Exception e) {e.printStackTrace();}
+
+                mAdapter.setItem(arrayData);
                 mAdapter.notifyDataSetChanged();
-
-                return false;
             }
         });
 
+        Button btnDeselAll = (Button) view.findViewById(R.id.btnDeselAll);
+        btnDeselAll.setOnTouchListener(CustomButtonTouchListener.getInstance());
+        btnDeselAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    for (int i = 0; i < arrayData.length(); i++) {
+
+                        JSONArray arryCategory = arrayData.getJSONObject(i).getJSONArray("SubCategoryIDS");
+                        for (int j = 0 ; j < arryCategory.length() ; j ++) {
+                            JSONObject subCategory = arryCategory.getJSONObject(j);
+                            subCategory.put("selected", false);
+                        }
+                    }
+
+                } catch (Exception e) {e.printStackTrace();}
+
+                mAdapter.setItem(arrayData);
+                mAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+        Button btnGo = (Button) view.findViewById(R.id.btnGo);
+        btnGo.setOnTouchListener(CustomButtonTouchListener.getInstance());
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String selectedCategory = "";
+                try {
+                    for (int i = 0; i < arrayData.length(); i++) {
+
+                        JSONArray arryCategory = arrayData.getJSONObject(i).getJSONArray("SubCategoryIDS");
+                        for (int j = 0 ; j < arryCategory.length() ; j ++) {
+                            JSONObject subCategory = arryCategory.getJSONObject(j);
+                            boolean bSelected = subCategory.getBoolean("selected");
+                            if (bSelected) {
+                                if (selectedCategory.length() < 1) {
+                                    selectedCategory = "" + subCategory.getInt("ID");
+                                } else {
+                                    selectedCategory += "," + subCategory.getInt("ID");
+                                }
+                            }
+                        }
+                    }
+
+
+                } catch (Exception e) {e.printStackTrace();}
+
+
+                AndroidHttpClient httpClient = new AndroidHttpClient(Global.kServerURL);
+                httpClient.setMaxRetries(3);
+                ParameterMap params = httpClient.newParams()
+                        .add("guid", Global.kGUID)
+                        .add("UserID", AppData.getInstance().loadLoginUserID())
+                        .add("lat", "" + MyLocation.getInstance().getLatitude())
+                        .add("long", "" + MyLocation.getInstance().getLongitude())
+                        .add("SelectedCategories", selectedCategory)
+                        ;
+
+
+                httpClient.get("/SaveInterests.aspx", params, new AsyncCallback() {
+
+                    @Override
+                    public void onComplete(HttpResponse httpResponse) {
+
+                        try {
+                            JSONObject result = new JSONObject(httpResponse.getBodyAsString());
+
+                            if (result.getString("Success").equals("Success")) {
+
+//                                arrayData = result.getJSONArray("Data");
+
+                                ((ChooseInterestActivity) getActivity()).onDoneCompleted();
+
+                            } else {
+
+                                DialogHelper.showToast(getActivity(), result.getString("Message"));
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                });
+
+            }
+        });
 
         // network
 
@@ -151,14 +218,13 @@ public class InterestFragment extends BaseFragment {
                     if (result.getString("Success").equals("Success")) {
 
                         arrayData = result.getJSONArray("Data");
-                        arrayDataSource = arrayData;
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 // TODO Auto-generated method stub
 
-                                mAdapter.setItem(arrayDataSource);
+                                mAdapter.setItem(arrayData);
                                 mAdapter.notifyDataSetChanged();
                             }
                         });
@@ -174,46 +240,7 @@ public class InterestFragment extends BaseFragment {
         });
     }
 
-    public void clickDone() {
 
-        String selectedCategory = getChooseCategories();
-
-        AndroidHttpClient httpClient = new AndroidHttpClient(Global.kServerURL);
-        httpClient.setMaxRetries(3);
-        ParameterMap params = httpClient.newParams()
-                .add("guid", Global.kGUID)
-                .add("UserID", AppData.getInstance().loadLoginUserID())
-                .add("lat", "" + MyLocation.getInstance().getLatitude())
-                .add("long", "" + MyLocation.getInstance().getLongitude())
-                .add("SelectedCategories", selectedCategory)
-                ;
-
-
-        httpClient.post("/SaveInterests.aspx", params, new AsyncCallback() {
-
-            @Override
-            public void onComplete(HttpResponse httpResponse) {
-
-
-                try {
-                    JSONObject result = new JSONObject(httpResponse.getBodyAsString());
-
-                    if (result.getString("Success").equals("Success")) {
-
-                        ((ChooseInterestActivity) getActivity()).onDoneCompleted();
-
-                    } else {
-
-                        DialogHelper.showToast(getActivity(), result.getString("Message"));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-    }
 
     public String getChooseCategories() {
 
@@ -296,7 +323,7 @@ public class InterestFragment extends BaseFragment {
 
                 convertView = mInflater.inflate(R.layout.list_item_interest_cell, null);
 
-                holder.imageView = (ImageView) convertView.findViewById(R.id.ivAvatar);
+                holder.imageView = (ImageView) convertView.findViewById(R.id.ivIcon);
                 holder.lbTitle = (CustomFontTextView) convertView.findViewById(R.id.tvTitle);
 
                 convertView.setTag(holder);
@@ -311,9 +338,9 @@ public class InterestFragment extends BaseFragment {
                 try {
 
                     if (item.getBoolean("selected")) {
-                        holder.imageView.setImageResource(R.drawable.interest_checked);
+                        holder.imageView.setImageResource(R.drawable.icon_selected_sub_category);
                     } else {
-                        holder.imageView.setImageResource(R.drawable.interest_unchecked);
+                        holder.imageView.setImageResource(R.drawable.icon_unselected_sub_category);
                     }
 
                     holder.lbTitle.setText(item.getString("CategoryName"));
@@ -337,7 +364,7 @@ public class InterestFragment extends BaseFragment {
         }
 
         @Override
-        public View getSectionHeaderView(int section, View convertView, ViewGroup parent) {
+        public View getSectionHeaderView(final int section, View convertView, ViewGroup parent) {
 
             ViewHolder holder = null;
 
@@ -347,6 +374,7 @@ public class InterestFragment extends BaseFragment {
 
                 convertView = mInflater.inflate(R.layout.list_item_interest_header, null);
 
+                holder.imageView = (ImageView) convertView.findViewById(R.id.ivIcon);
                 holder.lbTitle = (CustomFontTextView) convertView.findViewById(R.id.tvTitle);
 
                 convertView.setTag(holder);
@@ -356,7 +384,25 @@ public class InterestFragment extends BaseFragment {
 
             try {
 
-                JSONObject item = items.getJSONObject(section);
+                final JSONObject item = items.getJSONObject(section);
+
+
+                boolean bSelected = false;
+
+                for (int i = 0 ; i < item.getJSONArray("SubCategoryIDS").length() ; i ++) {
+                    JSONObject subCategory = item.getJSONArray("SubCategoryIDS").getJSONObject(i);
+                    if (subCategory.getBoolean("selected")) {
+                        bSelected = true;
+                        break;
+                    }
+                }
+
+                if (bSelected) {
+                    holder.imageView.setImageResource(R.drawable.icon_selected_category);
+                } else {
+                    holder.imageView.setImageResource(R.drawable.icon_unselected_category);
+                }
+
 
                 try {
 
@@ -364,6 +410,35 @@ public class InterestFragment extends BaseFragment {
 
                 } catch (Exception e) {e.printStackTrace();}
 
+
+                // click event
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        boolean bSelected = false;
+
+                        try {
+
+                            for (int i = 0; i < item.getJSONArray("SubCategoryIDS").length(); i++) {
+                                JSONObject subCategory = item.getJSONArray("SubCategoryIDS").getJSONObject(i);
+                                if (subCategory.getBoolean("selected")) {
+                                    bSelected = true;
+                                    break;
+                                }
+                            }
+
+                            for (int i = 0 ; i < arrayData.getJSONObject(section).getJSONArray("SubCategoryIDS").length() ; i ++) {
+                                JSONObject subCategory = arrayData.getJSONObject(section).getJSONArray("SubCategoryIDS").getJSONObject(i);
+                                subCategory.put("selected", !bSelected);
+                            }
+
+                        } catch (Exception e) {e.printStackTrace();}
+
+                        mAdapter.setItem(arrayData);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
 
             } catch (Exception e) {e.printStackTrace();}
 
@@ -376,25 +451,15 @@ public class InterestFragment extends BaseFragment {
 
             try {
 
-                JSONObject item = arrayDataSource.getJSONObject(section).getJSONArray("SubCategoryIDS").getJSONObject(row);
+                JSONObject item = arrayData.getJSONObject(section).getJSONArray("SubCategoryIDS").getJSONObject(row);
 
                 boolean selected = item.getBoolean("selected");
 
                 item.put("selected", !selected);
 
-                mAdapter.setItem(arrayDataSource);
+                mAdapter.setItem(arrayData);
                 mAdapter.notifyDataSetChanged();
 
-                try {
-                    JSONArray dataOfsection = arrayData.getJSONObject(section).getJSONArray("SubCategoryIDS");
-
-                    int index = MyJSON.indexOfJSONArray(dataOfsection, item);
-                    if (index != -1) {
-                        JSONObject obj = dataOfsection.getJSONObject(index);
-                        obj.put("selected", !selected);
-                    }
-
-                } catch (Exception e) {e.printStackTrace();}
 
             } catch (Exception e) {e.printStackTrace();}
 

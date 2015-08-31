@@ -38,7 +38,6 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_round_bg"
             android:text="Standard Deal"
-            android:textStyle="bold"
             android:textColor="@color/AppColor"/>
 
         <com.closeby.clzby.customcontrol.CustomFontButton
@@ -49,7 +48,6 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_round_bg"
             android:text="Time Base Deal"
-            android:textStyle="bold"
             android:textColor="@color/AppColor"/>
 
         <com.closeby.clzby.customcontrol.CustomFontButton
@@ -60,7 +58,6 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_round_bg"
             android:text="Cancel"
-            android:textStyle="bold"
             android:textColor="@color/AppColor"/>
 
     </LinearLayout>

@@ -3,17 +3,18 @@
     android:id="@+id/menu_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_blue">
+    android:background="@color/AppColor">
 
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="1dp"
+        android:dividerHeight="0dp"
         android:divider="#888888"
         android:background="@android:color/transparent"
+        android:scrollbars="none"
         >
 
     </ListView>
-    </FrameLayout>
+</FrameLayout>

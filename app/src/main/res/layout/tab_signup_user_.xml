@@ -3,21 +3,35 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/White"
     android:orientation="vertical" >
 
-    <com.closeby.clzby.customcontrol.CustomFontTextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:gravity="center"
-        android:text="Sign up and earn Loyalty points"
-        android:textColor="@color/White"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.closeby.clzby.customcontrol.CustomFontButton
+            android:id="@+id/btnBusiness"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Business"
+            android:layout_gravity="center"
+            android:textColor="@color/GrayColor"
+            android:background="@drawable/tab_normal_bg"/>
+
+        <com.closeby.clzby.customcontrol.CustomFontButton
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:text="User"
+            android:layout_gravity="center"
+            android:textColor="@color/White"
+            android:background="@drawable/tab_select_bg"/>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,9 +43,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:layout_margin="30dp"
             android:orientation="vertical" 
-            android:visibility="gone">
+            android:visibility="visible">
 
             <!--<ScrollView-->
                 <!--android:layout_width="match_parent"-->
@@ -41,156 +56,125 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <FrameLayout
+                        android:layout_width="225dp"
+                        android:layout_height="38dp"
                         android:layout_marginTop="10dp"
-                        android:orientation="horizontal" >
-
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="43dp"
-                            android:background="@drawable/icon_fullname" />
+                        android:background="@drawable/back_fullname">
 
                         <com.closeby.clzby.customcontrol.CustomFontEdittext
                             android:id="@+id/etFullName"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="40dp"
+                            android:gravity="center"
                             android:background="@android:color/transparent"
+                            android:textSize="15dp"
                             android:hint="Full Name"
+                            android:textColorHint="@color/GrayColor"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:textColor="@color/White" />
-                    </LinearLayout>
+                            android:textColor="@color/AppColor" />
+                    </FrameLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal" >
+                    <FrameLayout
+                        android:layout_width="225dp"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/back_email">
 
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="43dp"
-                            android:background="@drawable/icon_email" />
 
                         <com.closeby.clzby.customcontrol.CustomFontEdittext
                             android:id="@+id/etEmail"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="40dp"
+                            android:gravity="center"
                             android:background="@android:color/transparent"
+                            android:textSize="15dp"
                             android:hint="Email"
+                            android:inputType="textEmailAddress"
+                            android:textColorHint="@color/GrayColor"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:textColor="@color/White" />
-                    </LinearLayout>
+                            android:textColor="@color/AppColor" />
+                    </FrameLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal" >
+                    <FrameLayout
+                        android:layout_width="225dp"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/back_pwd">
 
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="43dp"
-                            android:background="@drawable/icon_pwd" />
 
                         <com.closeby.clzby.customcontrol.CustomFontEdittext
                             android:id="@+id/etPassword"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="40dp"
+                            android:gravity="center"
                             android:background="@android:color/transparent"
+                            android:textSize="15dp"
                             android:hint="Password"
+                            android:inputType="textPassword"
+                            android:textColorHint="@color/GrayColor"
                             android:maxLines="1"
                             android:password="true"
                             android:singleLine="true"
-                            android:textColor="@color/White" />
-                    </LinearLayout>
+                            android:textColor="@color/AppColor" />
+                    </FrameLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal" >
-
-                        <ImageView
-                            android:layout_width="43dp"
-                            android:layout_height="43dp"
-                            android:background="@drawable/icon_contact" />
+                    <FrameLayout
+                        android:layout_width="225dp"
+                        android:layout_height="38dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/back_contact">
 
                         <com.closeby.clzby.customcontrol.CustomFontEdittext
                             android:id="@+id/etContactNumber"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="40dp"
+                            android:gravity="center"
                             android:background="@android:color/transparent"
+                            android:textSize="15dp"
                             android:hint="Contact Number"
-                            android:maxLines="1"
                             android:inputType="phone"
+                            android:textColorHint="@color/GrayColor"
+                            android:maxLines="1"
                             android:singleLine="true"
-                            android:textColor="@color/White" />
-                    </LinearLayout>
+                            android:textColor="@color/AppColor" />
+                    </FrameLayout>
                 </LinearLayout>
             <!--</ScrollView>-->
 
             <com.closeby.clzby.customcontrol.CustomFontButton
                 android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
                 android:text="Submit"
                 android:textColor="@color/White"
-                android:background="@drawable/btn_background_blue" />
+                android:background="@drawable/button_round_blue_bg" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutFirst"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="30dp"
-            android:orientation="vertical" 
-            android:gravity="center">
 
-            <Button
-                android:id="@+id/btnGoto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/icon_manual" />
-
-            <com.closeby.clzby.customcontrol.CustomFontTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:text="Enter Details Manualy"
-                android:textColor="@color/White"
-                android:textSize="20sp"
-                android:textStyle="normal" />
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/icon_or" />
-        </LinearLayout>
     </FrameLayout>
 
     <Button
         android:id="@+id/btnFacebook"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:background="@drawable/btn_fb_txt" />
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_fb" />
+
 
 </LinearLayout>
